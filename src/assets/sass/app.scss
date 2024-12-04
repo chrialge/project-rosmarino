@@ -1,0 +1,185 @@
+body{
+    background-color: green;
+}
+
+
+
+#site_header{
+    position: fixed;
+    width: 100%;
+    background-color: white;
+
+    .container{
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &>.logo{
+
+            &>img{
+                width: 100%;
+                max-width: 80px;
+            }
+        }
+
+        &>.link{
+
+            &>ul{
+                display: flex;
+                list-style: none;
+                gap: 15px;
+
+                &>li>a{
+                    text-decoration: none;
+                    color: black;
+                    font-weight: 600;
+                    padding-bottom: 5px;
+                    border-bottom: 3px solid transparent;
+
+                    &:hover{
+                        transition: all 0.3s ease-in-out;
+                        border-color: #55883b;
+                    }
+                }
+
+                &>li>.active{
+                    color: #55883b;
+                }
+            }
+
+        
+        }
+
+        &>.btn-mobile{
+            display: none;
+            
+
+            &>img{
+                transition: transform 0.3s;
+                cursor: pointer;
+                width: 50px;
+            }
+
+            &>.link_for_mobile{
+                display: none;
+                z-index: 0;
+                width: 100%;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                background-color: white;
+                height: 0;
+                opacity: 0;
+                transition: all .5s ease;
+
+
+                &>ul{
+                    margin: 0;
+                    padding: 0;
+                    list-style: none;
+
+                    &>li{
+
+
+                        &>a{
+                            font-size: 20px;
+                            width: 100%;
+                            display: block;
+                            padding: 5px;
+                            padding-left: 20px;
+                            text-decoration: none;
+                            color: black;
+                            font-weight: 600;
+                            
+                            &:hover{
+                                transition: all 0.3s ease-in-out;
+                                background-color: gray;
+                            }
+                        }
+                    }
+                    
+
+                    &>li>.active{
+                        color: #55883b;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    #site_header>.container{
+
+        .link{
+
+            display: none;
+        }
+
+        .btn-mobile{
+            display: block;
+        }
+    }
+    
+}
+
+
+.link_footer{
+    text-decoration: none;
+    color: white;
+    border-bottom: 3px solid transparent;
+    margin-top: 3px;
+    padding-bottom: 5px;
+    display: inline-block;
+
+    &:hover{
+        transition: all 0.3s ease-in-out;
+        border-color: white;
+    }
+
+}
+
+.active_footer{
+    color: #55883b;
+}
+
+#jumbotron{
+    margin-top:46px;
+    background-image: url('./../../../public/img/sea.jpg');
+    height: 600px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+
+    .container_jumbo{
+        width: 100%;
+        margin: auto;
+        max-width: 600px;
+        text-align: center;
+
+        &>*{
+            margin: 30px 0px;
+        }
+
+        &>.btn_reserve{
+            cursor: pointer;
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #55883b;
+            font-weight: 600;
+            color: white;
+            border-radius: 20px;
+
+            &:hover{
+                transition: all 0.3s ease-in-out;
+                background-color: #274817;
+            }
+        }
+    }
+    
+}
