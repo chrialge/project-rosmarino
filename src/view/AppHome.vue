@@ -121,34 +121,34 @@ export default {
 
                     <div class="form-floating mb-5">
                         <input type="text" id="first_name" name="first_name" class="form-control" placeholder="">
-                        <label for="first_name">Nome</label>
+                        <label for="first_name">Nome *</label>
                     </div>
 
                     <div class="form-floating mb-3">
                         <input type="text" name="last_name" class="form-control" id="last_name" placeholder="">
-                        <label for="last_name">Cognome</label>
+                        <label for="last_name">Cognome *</label>
                     </div>
 
                     <div class="form-floating mb-3">
                         <input type="date" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">Email address</label>
+                        <label for="floatingInput">Data di nascita *</label>
                     </div>
 
                     <div class="form-floating mb-3">
                         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                        <label for="floatingInput">Email address</label>
+                        <label for="floatingInput">Email address *</label>
                     </div>
 
                     <div class="form-floating d-flex">
                         <input type="number" name="telephone" class="form-control" id="telephone"
                             placeholder="Password">
-                        <label for="telephone">telefono</label>
+                        <label for="telephone">Telefono *</label>
                     </div>
 
                     <div class="form-check w-100">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
-                            Default checkbox
+                            Ho preso visione della privacy policy
                         </label>
                     </div>
 

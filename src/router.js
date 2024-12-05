@@ -4,6 +4,7 @@ import AppMenu from "./view/AppMenu.vue";
 import AppAbout from "./view/AppAbout.vue";
 
 
+
 const router = createRouter({
     history: createWebHistory(),
     routes: [

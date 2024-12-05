@@ -10,6 +10,7 @@ body{
     background-color: white;
     top: 0;
     left: 0;
+    z-index: 9999;
 
     .container{
 
@@ -124,6 +125,16 @@ body{
             display: block;
         }
     }
+
+    #menu > div > div > #swipper{
+
+        display: block;
+    }
+
+    #container_badges{
+        display: none !important;
+    }
+    
     
 }
 
@@ -335,3 +346,77 @@ body{
     }
 }
 
+#menu{
+    padding: 60PX 0;
+
+    .container{
+        
+
+        .badges{
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: ceneter;
+            
+
+            &>.badge{
+                font-size: 15px;
+            }
+        }
+    }    
+}
+
+#menu > div > div > div > div.swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal{
+    
+    position: absolute;
+    z-index: 999;
+}
+
+#menu > div > div > .swipperclass{
+    height: 50px;
+    display: none;
+}
+
+#container_badges{
+    display: flex;
+    gap: 10px;
+}
+
+
+.conatiner_dishes{
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+    &>.card_dish{
+        cursor: pointer;
+        background-color: #55883b;
+        color: white;
+        text-align: center;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+        &>.img_bottom{
+            height: 200px;
+            margin: auto;
+
+
+            &>img{
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                object-position: center;
+               border-bottom-left-radius: 10px;
+               border-bottom-right-radius: 10px;
+
+            }
+        }
+    }
+}
+
+
+.container_return{
+    background-color: #55883b;
+    color: white;
+}
