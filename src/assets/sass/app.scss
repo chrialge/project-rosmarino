@@ -8,6 +8,8 @@ body{
     position: fixed;
     width: 100%;
     background-color: white;
+    top: 0;
+    left: 0;
 
     .container{
 
@@ -126,6 +128,41 @@ body{
 }
 
 
+@media screen and (max-width: 993px) {
+
+    #form_newsletter>.container{
+        flex-wrap: wrap;
+
+        &>*{
+            width: 100% !important;
+        }
+
+        &>.container_map{
+            height: 350px;
+        }
+
+        &>.container_newsletter{
+            padding-top: 50px;
+        }
+    }
+
+    #reviews{
+
+        &>.container{
+            flex-wrap: wrap;
+            row-gap: 90px;
+
+            &>*{
+                width: 100% !important;
+            }
+        }
+    }
+
+
+    
+}
+
+
 .link_footer{
     text-decoration: none;
     color: white;
@@ -148,7 +185,7 @@ body{
 #jumbotron{
     margin-top:46px;
     background-image: url('./../../../public/img/sea.jpg');
-    height: 600px;
+    height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -190,6 +227,111 @@ body{
     padding: 30px 0;
     margin: auto;
     width: 95%;
+
+    .elfsight-app-2fb0e2ba-3d20-45dd-a6d7-04bd01bd462c{
+        width: 50%;
+    }
+
+    .container_about{
+        width: 50%;
+        max-width: 600px;
+        margin: auto;
+        text-align: center;
+
+        &>h3{
+            padding-bottom: 30px;
+        }
+    }
 }
 
+
+#form_newsletter{
+    
+    padding: 70px 0;
+
+    &>.container{
+        display: flex;
+        gap: 30px;
+
+        &>*{
+            width: 50%;
+
+            &>h3{
+                color: #55883b;
+                margin-bottom: 25px;
+            }
+        }
+
+        
+
+
+    }
+}
+
+#map{
+    width: 100%;
+    height: 100%;
+
+    & > div.mapboxgl-canvas-container.mapboxgl-interactive.mapboxgl-touch-zoom-rotate{
+        width: 100%;
+        height: 100%;
+
+        &>.mapboxgl-canvas{
+            height: 100%important;
+            width: 100%;
+        }
+    }
+}
+
+
+.form-control{
+    border: 0!important;
+    border-bottom: 2px solid #55883b !important;
+}
+
+
+.form-control:focus{
+    box-shadow: 0 0 0 .25rem #55883b5f !important;
+    border-color: #55883b !important;
+    color:#55883b!important;
+
+}
+
+#flexCheckDefault{
+    margin-left: 1px!important;
+    margin-right: 8px;
+
+    &:checked{
+        background-color: #55883b;
+        border-color: #55883b;
+    }
+
+    &:focus{
+        box-shadow: 0 0 0 .25rem #55883b5f !important;
+    }
+}
+
+.form-check{
+    padding-left: 12px !important;
+    padding: 10px 0;
+    margin-bottom: 30px!important;
+
+}
+
+.btn_newsletter{
+    width: 200px !important;
+    display: inline-block;
+    margin-left: 12px;
+    margin-top: 20px;
+    background-color: #55883b;
+    border: 0;
+    color: white;
+    padding: 5px ;
+    border-radius: 20px;
+
+    &:hover{
+        transition: all 0.3s ease-in-out;
+        background-color: #274817;
+    }
+}
 
