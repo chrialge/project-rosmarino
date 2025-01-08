@@ -8,10 +8,6 @@ export default {
     return {
 
     }
-  },
-  components: {
-    HeaderApp,
-    FooterApp,
   }
 
 }
@@ -19,11 +15,11 @@ export default {
 
 <template>
 
-  <HeaderApp />
+
 
   <router-view></router-view>
 
-  <FooterApp />
+
 
 </template>
 

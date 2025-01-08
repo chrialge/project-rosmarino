@@ -294,10 +294,11 @@ body{
     }
 }
 
-
-.form-control{
-    border: 0!important;
-    border-bottom: 2px solid #55883b !important;
+.container_newsletter>form>.form-floating>.form-control{
+    border-bottom: 2px solid #55883b;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
 }
 
 
@@ -366,11 +367,7 @@ body{
     }    
 }
 
-#menu > div > div > div > div.swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal{
-    
-    position: absolute;
-    z-index: 999;
-}
+
 
 #menu > div > div > .swipperclass{
     height: 50px;
@@ -380,6 +377,12 @@ body{
 #container_badges{
     display: flex;
     gap: 10px;
+
+    &>.badge{
+        cursor: pointer;
+        font-size: 20px;
+        background-color: #55883b;
+    }
 }
 
 
@@ -419,4 +422,46 @@ body{
 .container_return{
     background-color: #55883b;
     color: white;
+}
+
+.card_single_dish{
+    padding: 10px 15px;
+}
+
+
+#form_newsletter > div > div.container_newsletter > form > div:nth-child(3) > div{
+
+    height: 100%;
+
+    &>div{
+        height: 100%;
+
+        &>.dp__input_wrap{
+            height: 100%;
+
+            &>input{
+                height: 100%;
+                border-left: 0;
+                border-top: 0;
+                border-right: 0;
+                border-bottom: 2px solid #55883b;
+            }
+        }
+    }
+}
+
+.container_checkbox{
+
+    &>label{
+        display: inline-block;
+
+    }
+
+
+}
+#checkPrivacy{
+    width: 18px;
+    height: 22px;
+    aspect-ratio: 1;
+    margin-left: 0;
 }
