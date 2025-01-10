@@ -10,6 +10,14 @@ export default {
         }
     },
     methods: {
+        openMap() {
+            const latitude = 43.99604134408964;
+            const longitude = 12.666046773103155;
+
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+
+            window.open(url, "_blank");
+        }
     },
     mounted() {
     }
@@ -22,13 +30,13 @@ export default {
 
 
 
-    <footer class="text-white text-center text-lg-start bg-dark">
+    <footer id="site_footer" class="text-white text-center text-lg-start ">
         <!-- Grid container -->
         <div class="container p-4">
             <!--Grid row-->
             <div class="row mt-4">
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                     <h5 class="text-uppercase mb-4">Link</h5>
 
                     <ul class="list-unstyled" style="z-index: 999;">
@@ -50,20 +58,20 @@ export default {
                     </ul>
 
 
-                    <div class="mt-4">
+                    <div class="mt-4 d-flex gap-2 justify-content-center">
                         <!-- Facebook -->
-                        <a type="button" class="btn btn-floating btn-dark btn-lg"
+                        <a type="button" class="btn_social"
                             href="https://www.facebook.com/people/Rosmarino-Riccione/100091844406116/">
                             <i class="fab fa-facebook-f"></i>
                         </a>
 
                         <!-- Twitter -->
-                        <a type="button" class="btn btn-floating btn-dark btn-lg">
+                        <a type="button" class="btn_social">
                             <i class="fab fa-twitter"></i>
                         </a>
 
                         <!-- Instagram -->
-                        <a type="button" class="btn btn-floating btn-dark btn-lg">
+                        <a type="button" class="btn_social">
                             <i class="fab fa-instagram"></i>
                         </a>
 
@@ -77,8 +85,12 @@ export default {
 
 
                     <ul class="fa-ul" style="margin-left: 1.65em;">
-                        <li class="mb-3">
-                            <span class="fa-li"><i class="fas fa-home"></i></span><span class="ms-2">
+                        <li class="mb-3" @click="openMap()" style="cursor: pointer;">
+
+                            <span class="fa-li">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </span>
+                            <span class="ms-2">
                                 Viale Trento Trieste 61, 47838 Riccione Italia
                             </span>
                         </li>
@@ -98,7 +110,7 @@ export default {
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase mb-4">Orari di apertura :</h5>
 
-                    <table class="table text-center text-white">
+                    <table class="table text-center ">
                         <tbody class="font-weight-normal">
                             <tr>
                                 <td>lundedi:</td>

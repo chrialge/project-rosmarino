@@ -1,6 +1,4 @@
 <script>
-import tt from '@tomtom-international/web-sdk-maps';
-import cc from '@tomtom-international/web-sdk-services';
 import HeaderApp from './components/HeaderApp.vue';
 import FooterApp from './components/FooterApp.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
@@ -207,51 +205,30 @@ export default {
 
             }
         },
+        openMap() {
+            const latitude = 43.99604134408964;
+            const longitude = 12.666046773103155;
 
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+
+            window.open(url, "_blank");
+        }
 
     },
     mounted() {
 
-        setTimeout(() => {
 
-            const dd = document.querySelector("#eapps-tripadvisor-reviews-2fb0e2ba-3d20-45dd-a6d7-04bd01bd462c > div > div > div > div.WidgetBackground__ContentContainer-sc-1ho7q3r-1.jUKeJm > div > a")
-            console.log(dd);
+        const pos = { lat: 43.99604134408964, lng: 12.666046773103155 };
 
-            dd.setAttribute('style', 'display: none;');
-        }, 3000);
+        const map = new google.maps.Map(document.getElementById("map"), { center: pos, zoom: 18 })
 
+        const marker = new google.maps.Marker({
+            position: pos,
+            map: map,
 
-
-        const address = 'Viale Trento Trieste 61, 47838 Riccione Italia'
-        cc.services.fuzzySearch({
-            key: 'k41eUXpkTG7gxEctBAJDidKJ6MYAEIwd',
-            query: address
         })
-            .then((resp) => {
-                // console.log(resp.results)
-
-                const longitude = resp.results[0].position.lng;
-                const latitudine = resp.results[0].position.lat;
-
-                // console.log(longitude, latitudine)
-
-                tt.setProductInfo("Ristorante Rosmarino", "1.0")
-
-                const map = tt.map({
-                    key: 'k41eUXpkTG7gxEctBAJDidKJ6MYAEIwd',
-                    container: 'map',
-                    zoom: 14,
-                    language: 'it-IT',
-                    center: resp.results[2].position
-                })
 
 
-
-                map.on('load', () => {
-                    new tt.Marker().setLngLat(resp.results[2].position).addTo(map)
-
-                })
-            })
     }
 
 }
@@ -281,7 +258,7 @@ export default {
 
 
             <router-link class="btn_reserve" :to="{ name: 'reservation' }">
-                Prenota
+                Prenota Ora!
             </router-link>
 
         </div>
@@ -292,18 +269,48 @@ export default {
 
 
 
+
+
+    <section id="menu">
+
+
+        <div class="container_menu_card">
+            <router-link class="container_entre_plate" :to="{ name: 'menu' }">
+                <div class="container_card">
+                    <h4>Menu Antipasti</h4>
+                    <img src="../../public/img/entre.png" alt="">
+                </div>
+            </router-link>
+
+
+            <router-link class="container_first_plate" :to="{ name: 'menu' }">
+                <div class="container_card">
+                    <h4>Menu Primi</h4>
+                    <img src="../../public/img/entre.png" alt="">
+                </div>
+            </router-link>
+
+            <router-link class="container_second_plate" :to="{ name: 'menu' }">
+                <div class="container_card">
+                    <h4>Menu Secondi</h4>
+                    <img src="../../public/img/entre.png" alt="">
+                </div>
+            </router-link>
+
+            <router-link class="container_dessert_plate" :to="{ name: 'menu' }">
+                <div class="container_card">
+                    <h4>Menu Dessert</h4>
+                    <img src="../../public/img/entre.png" alt="">
+                </div>
+            </router-link>
+        </div>
+    </section>
+
     <section id="reviews">
 
-        <div class="container d-flex justify-content-between align-items-center">
+        <div class="container d-flex justify-content-center align-items-center">
 
-            <div class="container_about">
-                <h3>Ristorante Rosmarino</h3>
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam ea beatae similique incidunt iste
-                    corporis quia quis illo iure eveniet! Perspiciatis sint repellendus nisi sapiente saepe temporibus
-                    eaque mollitia odit?
-                </p>
-            </div>
+
             <div class="elfsight-app-2fb0e2ba-3d20-45dd-a6d7-04bd01bd462c" data-elfsight-app-lazy></div>
         </div>
 
@@ -312,22 +319,33 @@ export default {
     <!-- /#reviews -->
 
     <section id="form_newsletter">
-        <div class="container">
+        <div class="container-lg">
             <div class="container_map">
                 <h3>Dove siamo?</h3>
 
+                <button class="" style="outline: 0;" @click="openMap()">
+                    <span>
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </span>
+                    <span class="ms-2">
+                        Viale Trento Trieste 61, 47838 Riccione Italia
+                    </span>
+                </button>
+
                 <div id="map"></div>
+
+
             </div>
 
             <div class="container_newsletter">
                 <h3>Newsletter</h3>
 
-                <form action="" class="row-cols-2 d-flex row" @submit.prevent="check_form()">
+                <form action="" class="row-cols-1 row-cols-sm-2 d-flex row" @submit.prevent="check_form()">
 
                     <div class="form-floating mb-4">
                         <input type="text" v-model="name" id="name" name="name" class="form-control" placeholder=""
                             @keyup="hide_name_error('name', 'error_name')" @blur="check_name('name', 'error_name')">
-                        <label for="name">Nome *</label>
+                        <label for="name" class="label_input">Nome *</label>
 
                         <!-- messaggio di errore lato front -->
                         <span id="error_name" class="text-danger" style="display: none;">
@@ -340,7 +358,7 @@ export default {
                         <input type="text" v-model="last_name" name="last_name" class="form-control" id="last_name"
                             placeholder="" @keyup="hide_name_error('last_name', 'error_last_name')"
                             @blur="check_name('last_name', 'error_last_name')">
-                        <label for="last_name">Cognome *</label>
+                        <label for="last_name" class="label_input">Cognome *</label>
 
                         <!-- messaggio di errore lato front -->
                         <span id="error_last_name" class="text-danger" style="display: none;">
@@ -350,7 +368,7 @@ export default {
 
                     <div class="mb-4">
                         <VueDatePicker v-model="date" :format="format" :enable-time-picker="false" @blur="check_date()"
-                            placeholder="Data di nascita *">
+                            placeholder="Data di nascita *" locale="it" cancelText="Cancella" selectText="Seleziona">
                         </VueDatePicker>
 
                     </div>
@@ -360,7 +378,7 @@ export default {
                         <input type="email" v-model="email" class="form-control" id="email"
                             placeholder="name@example.com" @keyup="hide_error_email()" @blur="check_email()"
                             style="position: relative;">
-                        <label for="email">Email address *</label>
+                        <label for="email" class="label_input">Email address *</label>
 
                         <!-- messaggio di errore lato front -->
                         <span id="error_email" class="text-danger" style="display: none; position: absolute;">
@@ -371,7 +389,7 @@ export default {
                     <div class="form-floating ">
                         <input type="number" v-model="telephone" name="telephone" class="form-control" id="telephone"
                             placeholder="" @blur="check_telephone()" @keyup="hide_telephone_error()">
-                        <label for="telephone">Telefono *</label>
+                        <label for="telephone" class="label_input">Telefono *</label>
 
                         <!-- messaggio di errore lato front -->
                         <span id="error_telephone" class="text-danger" style="display: none;">
@@ -381,8 +399,7 @@ export default {
 
                     <div class="form-check w-100" id="container_checkbox">
                         <input class="form-check-input" type="checkbox" id="checkPrivacy">
-                        <label class="form-check-label" for="checkPrivacy"
-                            style="margin-left: 0.55rem; margin-top: 3px;">
+                        <label class="form-check-label" for="checkPrivacy">
                             Ho preso visione della privacy policy
                         </label>
                         <span id="error_check" class="text-danger" style="display: none;">
@@ -404,6 +421,14 @@ export default {
 
 
     </section>
+
+    <div class="whatapp">
+
+        <a href="http://wa.me/393200133882" target="_blank">
+            <i class="fa-brands fa-whatsapp"></i>
+
+        </a>
+    </div>
 
     <FooterApp />
 
