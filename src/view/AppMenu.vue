@@ -29,6 +29,13 @@ export default {
 
   <HeaderApp />
 
+  <div class="space_header">
+  </div>
+
+
+
+
+
   <section id="jumbotron">
     <div class="container_jumbo">
       <h1>
@@ -58,149 +65,149 @@ export default {
 
 
 
-    <div class="container_entre_plate_menu">
+    <div class="container_entre_plate_menu bg_menu_first">
       <h2>Antipasti</h2>
       <ul>
         <li>
-          <h5>Antipasto freddo</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>18,00 &euro;</span>
+          <h5 class="name_plate">Antipasto freddo</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">18,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Antipasto freddo</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>18,00 &euro;</span>
+          <h5 class="name_plate">Antipasto freddo</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">18,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Antipasto freddo</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>18,00 &euro;</span>
+          <h5 class="name_plate">Antipasto freddo</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">18,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Antipasto freddo</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>18,00 &euro;</span>
+          <h5 class="name_plate">Antipasto freddo</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">18,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Antipasto freddo</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>18,00 &euro;</span>
+          <h5 class="name_plate">Antipasto freddo</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">18,00 &euro;</span>
         </li>
       </ul>
     </div>
     <!-- /.container_entre_plate_menu -->
 
-    <div class="container_first_plate_menu">
+    <div class="container_first_plate_menu bg_menu_second">
 
       <h2>Primi Piatti</h2>
       <ul>
         <li>
-          <h5>Spaghetto alla carbonara</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>16,00 &euro;</span>
+          <h5 class="name_plate">Spaghetto alla carbonara</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">16,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Spaghetto alla carbonara</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>16,00 &euro;</span>
+          <h5 class="name_plate">Spaghetto alla carbonara</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">16,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Spaghetto alla carbonara</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>16,00 &euro;</span>
+          <h5 class="name_plate">Spaghetto alla carbonara</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">16,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Spaghetto alla carbonara</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>16,00 &euro;</span>
+          <h5 class="name_plate">Spaghetto alla carbonara</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">16,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Spaghetto alla carbonara</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>16,00 &euro;</span>
+          <h5 class="name_plate">Spaghetto alla carbonara</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">16,00 &euro;</span>
         </li>
       </ul>
     </div>
     <!-- /.container_first_plate_menu -->
 
-    <div class="container_second_plate_menu">
+    <div class="container_second_plate_menu bg_menu_first">
 
-      <h2>Antipasti</h2>
+      <h2>Secondi</h2>
       <ul>
         <li>
-          <h5>Coniglio in porchetta</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>20,00 &euro;</span>
+          <h5 class="name_plate">Coniglio in porchetta</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">20,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Coniglio in porchetta</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>20,00 &euro;</span>
+          <h5 class="name_plate">Coniglio in porchetta</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">20,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Coniglio in porchetta</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>20,00 &euro;</span>
+          <h5 class="name_plate">Coniglio in porchetta</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">20,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Coniglio in porchetta</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>20,00 &euro;</span>
+          <h5 class="name_plate">Coniglio in porchetta</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">20,00 &euro;</span>
         </li>
 
         <li>
-          <h5>Coniglio in porchetta</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>20,00 &euro;</span>
+          <h5 class="name_plate">Coniglio in porchetta</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">20,00 &euro;</span>
         </li>
       </ul>
 
     </div>
     <!-- /.container_second_plate_menu -->
 
-    <div class="container_dessert_plate_menu">
+    <div class="container_dessert_plate_menu bg_menu_second">
 
       <h2>Dessert</h2>
       <ul>
         <li>
-          <h5>semifreddo al pistacchio</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>17,00 &euro;</span>
+          <h5 class="name_plate">Semifreddo al pistacchio</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">17,00 &euro;</span>
         </li>
 
         <li>
-          <h5>semifreddo al pistacchio</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>17,00 &euro;</span>
+          <h5 class="name_plate">Semifreddo al pistacchio</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">17,00 &euro;</span>
         </li>
 
         <li>
-          <h5>semifreddo al pistacchio</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>17,00 &euro;</span>
+          <h5 class="name_plate">Semifreddo al pistacchio</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">17,00 &euro;</span>
         </li>
 
         <li>
-          <h5>semifreddo al pistacchio</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>17,00 &euro;</span>
+          <h5 class="name_plate">Semifreddo al pistacchio</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">17,00 &euro;</span>
         </li>
 
         <li>
-          <h5>semifreddo al pistacchio</h5>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
-          <span>17,00 &euro;</span>
+          <h5 class="name_plate">Semifreddo al pistacchio</h5>
+          <p class="description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, harum.</p>
+          <span class="price">17,00 &euro;</span>
         </li>
       </ul>
     </div>

@@ -168,6 +168,18 @@ export default {
                 const url = this.base_api_url + "api/customers";
                 axios.post(url, data).then((response) => {
                     console.log(response)
+
+                    if (response.data.success == true) {
+                        document.getElementById("popup").style.visibility = "visible";
+                        document.getElementById("popup").style.opacity = "1";
+                        document.querySelector(".popup-inner").style.bottom = "0vw";
+                        document.querySelector(".popup-inner").style.right = "0vh";
+                        document.querySelector(".popup-inner").style.transform = "rotate(0)";
+                    }
+
+
+                }).catch(err => {
+                    console.error(err);
                 })
             } else {
                 if (check.checked === false) {
@@ -206,26 +218,35 @@ export default {
             }
         },
         openMap() {
-            const latitude = 43.99604134408964;
-            const longitude = 12.666046773103155;
+            const latitude = 43.99599650186263;
+            const longitude = 12.666068938638197;
 
             const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
 
             window.open(url, "_blank");
+        },
+        closeModal() {
+
+            document.getElementById("popup").style.visibility = "";
+            document.getElementById("popup").style.opacity = "";
+            document.querySelector(".popup-inner").style.bottom = "";
+            document.querySelector(".popup-inner").style.right = "";
+            document.querySelector(".popup-inner").style.transform = "";
         }
 
     },
     mounted() {
 
 
-        const pos = { lat: 43.99604134408964, lng: 12.666046773103155 };
 
-        const map = new google.maps.Map(document.getElementById("map"), { center: pos, zoom: 18 })
+        const pos = { lat: 43.99599650186263, lng: 12.666068938638197 };
+
+        const map = new google.maps.Map(document.getElementById("map"), { center: pos, zoom: 19, mapId: "81a20886051208a2" })
 
         const marker = new google.maps.Marker({
             position: pos,
             map: map,
-
+            title: "Uluru"
         })
 
 
@@ -238,7 +259,22 @@ export default {
 
     <HeaderApp />
 
+    <div class="space_header">
 
+    </div>
+
+
+    <div class="popup" id="popup">
+        <div class="popup-inner">
+            <div class="popup-top">
+                <img src="../../public/img/check-image.png" alt="">
+            </div>
+            <div class="popup-body">
+                <span class="popup-text">Complimenti!! Ti sei sei registrato/a con successo.</span>
+            </div>
+            <a class="popup__close" @click="closeModal()">X</a>
+        </div>
+    </div>
 
     <section id="jumbotron">
         <div class="container_jumbo">
@@ -319,7 +355,7 @@ export default {
     <!-- /#reviews -->
 
     <section id="form_newsletter">
-        <div class="container-lg">
+        <div class="container">
             <div class="container_map">
                 <h3>Dove siamo?</h3>
 

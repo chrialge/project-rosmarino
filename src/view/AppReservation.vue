@@ -6,7 +6,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { getMonth, getYear, getDate } from 'date-fns';
 import axios from 'axios';
-import { router } from '../router';
+
 
 
 
@@ -147,7 +147,7 @@ export default {
             }
         },
         hide_name_error(element, error) {
-            console.log('ciao')
+
             const input = document.getElementById(element);
             const errorEl = document.getElementById(error);
             const regex = /[^a-z']/
@@ -283,24 +283,24 @@ export default {
 
 
         },
-        getTime() {
-            console.log('dio porco')
-        },
+        format() {
 
-    },
-    computed: {
-        filters() {
-            const currentDate = new Date();
-            currentDate.setTime(47400000);
-            return {
-                months: [0, 1, 2, 3],
 
-                times: {
-                    hours: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 15, 16, 17],
-                }
+            if (this.date == "") {
+                return "Prenotato il ...."
+            } else {
 
+                const date = new Date(this.date);
+
+                const day = date.getDate();
+                const month = date.getMonth() + 1;
+                const year = date.getFullYear();
+
+                const hours = date.getHours();
+                const minutes = date.getMinutes();
+
+                return `${day}/${month}/${year} alle ore ${hours}:${minutes}`
             }
-
         }
 
     },
@@ -389,9 +389,9 @@ export default {
                 <div class="progress" id="progress">
 
                 </div>
-                <div class="progress_step progress-step-active" data-title="Intro"></div>
-                <div class="progress_step" data-title="Contacts"></div>
-                <div class="progress_step" data-title="Info"></div>
+                <div class="progress_step progress-step-active" data-title="Nome"></div>
+                <div class="progress_step" data-title="Contatti"></div>
+                <div class="progress_step" data-title="Dati"></div>
             </div>
 
 
@@ -420,7 +420,7 @@ export default {
 
                 <div>
                     <a href="#" class="btn_a btn-next width_50 ml_auto">
-                        Next
+                        Avanti
                     </a>
                 </div>
 
@@ -448,10 +448,10 @@ export default {
 
                 <div class="btns_group">
                     <a href="#" class="btn_a btn-previous">
-                        Previous
+                        Indietro
                     </a>
                     <a href="#" class="btn_a btn-next ">
-                        Next
+                        Avanti
                     </a>
                 </div>
             </div>
@@ -459,8 +459,9 @@ export default {
             <div class="form-step ">
                 <div class="input_group">
                     <VueDatePicker v-model="date" :min-date="new Date()" :min-time="minTime" :start-time="startTime"
-                        @date-update="getTime()" minutes-increment="15" locale="it" :disabled-times="isRange"
-                        :state="errorDate">
+                        minutes-increment="15" locale="it" :disabled-times="isRange" :state="errorDate"
+                        :disabled-week-days="[1]" :format="format" placeholder="Ora e Data *" cancelText="Cancella"
+                        selectText="Seleziona">
                     </VueDatePicker>
                 </div>
 
@@ -475,7 +476,7 @@ export default {
 
                 <div class="btns_group">
                     <a href="#" class="btn_a btn-previous">
-                        Previous
+                        Indietro
                     </a>
                     <button class="btn_a " type="submit" :disabled="loading">
                         <span v-if="loading == false">Conferma</span>
@@ -496,7 +497,7 @@ export default {
 /* nome,cognome, telefono, email, date, ore, persone */
 
 :root {
-    --primary-color: rgb(11, 78, 179);
+    --primary-color: #074799;
 }
 
 
@@ -508,7 +509,7 @@ export default {
 }
 
 .layout_reservation {
-    background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(70, 237, 252, 1) 100%);
+    background: #074799;
     margin: 0;
     display: grid;
     place-items: center;
@@ -518,6 +519,7 @@ export default {
 /* Global */
 
 label {
+
     display: block;
     margin-bottom: 0.5rem;
     color: var(--primary-color);
@@ -597,7 +599,7 @@ input {
         position: absolute;
         top: calc(100% + 0.5rem);
         font-size: 0.85rem;
-        color: #666;
+        color: var(--primary-color);
     }
 
     &::before {
@@ -623,11 +625,11 @@ input {
 }
 
 .form {
-    background-color: white;
+    background-color: #BE9639;
     max-width: 500px;
     width: 100%;
     margin: 0 auto;
-    border: 1px solid #ccc;
+    border: 1px solid #BE9639;
     border-radius: 0.35rem;
     padding: 1.5rem;
     box-shadow: 0 0 5px black;
@@ -663,6 +665,7 @@ input {
 /* Button */
 
 .btn_a {
+    border: 0;
     padding: 0.74rem;
     display: block;
     text-decoration: none;
@@ -682,7 +685,7 @@ input {
     padding: 0.74rem;
     display: block;
     text-decoration: none;
-    background-color: rgba(11, 78, 179, 0.7);
+    background-color: #074699b7;
     color: #f3f3f3;
     text-align: center;
     cursor: pointer;
@@ -695,5 +698,12 @@ input {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
+}
+
+
+#app>div>form>div.form-step.form-step-active>div:nth-child(1)>div>div:nth-child(1)>div>input {
+
+    border: 2px solid var(--primary-color);
+    box-shadow: 0px 0px transparent;
 }
 </style>

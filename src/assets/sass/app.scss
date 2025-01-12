@@ -11,7 +11,7 @@
 #site_header{
     position: fixed;
     width: 100%;
-    background-color: var(--first-bg-color);
+    background-color: #074699d4;
     top: 0;
     left: 0;
     z-index: 9999;
@@ -142,21 +142,7 @@
 
 @media screen and (max-width: 993px) {
 
-    #form_newsletter>.container-lg{
-        flex-wrap: wrap;
-
-        &>*{
-            width: 100% !important;
-        }
-
-        &>.container_map{
-            height: 450px;
-        }
-
-        &>.container_newsletter{
-            padding-top: 50px;
-        }
-    }
+ 
 
     #reviews{
 
@@ -175,10 +161,14 @@
 }
 
 
+.space_header{
+    width: 100%;
+    height: 80px;
+    background-color: var(--first-bg-color)
+}
 
 
 #jumbotron{
-    margin-top:46px;
     background-image: url('./../../../public/img/sea.jpg');
     height: 100vh;
     background-repeat: no-repeat;
@@ -186,6 +176,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    
     
 
     .container_jumbo{
@@ -250,12 +241,13 @@
     background-color: var(--first-bg-color);
     padding: 70px 0;
 
-    &>.container-lg{
-        display: flex;
-        gap: 30px;
+    &>.container{
+        max-width: 940px;
 
         &>*{
-            width: 50%;
+
+            height: 100%;
+            margin: auto;
 
             &>h3{
                 color: var(--first-color-text);
@@ -278,6 +270,10 @@
             }
         }
 
+        &>.container_newsletter{
+            padding-top: 70px;
+        }
+
         
 
 
@@ -286,7 +282,10 @@
 
 #map{
     width: 100%;
-    height: 80%;
+    height: 100%;
+    min-height: 550px;
+    max-width: 940px;
+    
 
     & > div.mapboxgl-canvas-container.mapboxgl-interactive.mapboxgl-touch-zoom-rotate{
         width: 100%;
@@ -311,6 +310,7 @@
 .container_newsletter>form>.form-floating>.label_input{
     color: var(--first-color-text);
     background-color: transparent;
+    z-index: 100;
 }
 .form-floating>.form-control:focus~label, .form-floating>.form-control:not(:placeholder-shown)~label{
     color: var(--first-color-text)!important;
@@ -393,10 +393,15 @@
     
         &:checked{
             background-color: var(--first-color-text);
+            border-color: var(--first-color-text);
         }
+
+
     
         &:focus{
             box-shadow: 0 0 0 .25rem #be963985 !important;
+            border-color: var(--first-color-text);
+
         }
     }
 
@@ -476,6 +481,8 @@
 
 
         }
+
+
     }
 }
 
@@ -484,7 +491,7 @@
     position: fixed;
     right: 30px;
     bottom: 30px;
-    z-index: 99999;
+    z-index: 999;
 
     &>a{
         font-size: 28px;
@@ -512,8 +519,8 @@
 
     &>*{
         text-align: center;
-        margin-top: 30px;
-        margin-bottom: 30px;
+        padding-top: 30px;
+        padding-bottom: 30px;
 
         &>h2{
             margin-bottom: 25px;
@@ -527,9 +534,45 @@
             &>li{
                 margin-bottom: 10px;
 
-                &>p{
+                &>.description{
                     margin-bottom: 5px;
+                    color: white;
                 }
+
+                &>.price{
+                    color: white;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+
+    .bg_menu_second{
+        background-color: var(--first-bg-color);
+
+        &>h2{
+            color: var(--first-color-text);
+        }
+
+        &>ul>li{
+
+            &>h5{
+                color: var(--first-color-text);
+            }
+        }
+    }
+
+    .bg_menu_first{
+        background-color: var(--first-color-text);
+
+        &>h2{
+            color: var(--first-bg-color);
+        }
+
+        &>ul>li{
+
+            &>h5{
+                color: var(--first-bg-color);
             }
         }
     }
@@ -634,3 +677,81 @@
 #form_newsletter > div > div.container_newsletter > form > div:nth-child(3) > div > div:nth-child(1) > div > button > svg{
     fill: var(--first-color-text);
 }
+
+
+.popup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .80);
+    z-index: 2;
+    visibility: hidden;
+    opacity: 0;
+    overflow: hidden;
+    transition: .64s ease-in-out;
+    z-index: 99999;
+    
+
+    &-inner {
+      position: relative;
+      bottom: -100vw;
+      right: -100vh;
+      margin-left: 5%;
+      max-width: 380px;
+      max-height: 450px;
+      width: 80%;
+      height: 80%;
+      background-color: var(--first-color-text);
+      transform: rotate(32deg);
+      transition: .64s ease-in-out;
+      z-index: 99999;
+      border-radius: 20px;
+    }
+    &-top{
+        max-width: 350px;
+        margin: auto;
+        &>img{
+            width: 100%;
+
+        }
+    }
+    &-body{
+        padding: 10px;
+        font-size: 20px;
+        font-weight: 600;
+        text-align: center;
+        color: #008000;
+    }
+
+    &:target {
+      visibility: visible;
+      opacity: 1;
+      .popup-inner {
+        bottom: 0;
+        right: 0;
+        transform: rotate(0);
+      }
+    }
+    &__close {
+      position: absolute;
+      right: -1rem;
+      top: -1rem;
+      width: 3rem;
+      height: 3rem;
+      font-size: .875rem;
+      font-weight: 300;
+      border-radius: 100%;
+      background-color: #0A0A0A;
+      z-index: 4;
+      color: #fff;
+      line-height: 3rem;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
