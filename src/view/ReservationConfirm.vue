@@ -38,7 +38,7 @@ export default {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(70, 237, 252, 1) 100%);
+    background: #074799;
 
     &>.card_confirm {
         max-width: 700px;
@@ -47,7 +47,8 @@ export default {
 
         padding: 20px;
         border-radius: 40px;
-        background-color: white;
+        background-color: #BE9639;
+
 
         .img_top {
             max-width: 400px;
@@ -62,14 +63,21 @@ export default {
 
             &>h2 {
                 padding-bottom: 15px;
+                color: #008000;
+            }
+
+            &>p {
+                color: white;
             }
 
             &>a {
-                background-color: rgba(63, 94, 251, 1);
+                background: #074799;
+
                 color: white;
 
                 &:hover {
-                    background-color: rgba(63, 94, 251, 0.7);
+                    background: #074699a8;
+
                 }
             }
         }

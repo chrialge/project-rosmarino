@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
-import AppHome from "./view/AppHome.vue";
-import AppMenu from "./view/AppMenu.vue";
-import AppAbout from "./view/AppAbout.vue";
-import AppReservation from "./view/AppReservation.vue";
-import ReservationConfirm from "./view/ReservationConfirm.vue";
+
+
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -11,27 +9,28 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
-            component: AppHome,
+            component: () => import(/* webpackChunkName: "group-foo" */  "./view/AppHome.vue"),
         },
         {
             path: '/reservation-confirm',
             name: 'confirm',
-            component: ReservationConfirm, 
+            component: () => import(/* webpackChunkName: "confirm" */ "./view/ReservationConfirm.vue"),
         },
         {
             path: '/menu',
             name: 'menu',
-            component: AppMenu,
+            component: () => import(/* webpackChunkName: "menu" */ "./view/AppMenu.vue"),
         },
         {
             path: '/chi-siamo',
             name: 'about',
-            component: AppAbout,
+            component: () => import(/* webpackChunkName: "about-us" */ "./view/AppAbout.vue"),
         },
         {
             path: '/reservation',
             name: 'reservation',
-            component: AppReservation,
+            component: () => import(/* webpackChunkName: "reservation" */"./view/AppReservation.vue"),
+
         },
     ]
 })

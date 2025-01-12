@@ -250,6 +250,16 @@ export default {
         })
 
 
+
+        const element = document.querySelector("#eapps-tripadvisor-reviews-2fb0e2ba-3d20-45dd-a6d7-04bd01bd462c > div > div > div > div.WidgetBackground__ContentContainer-sc-1ho7q3r-1.jUKeJm > div > a");
+
+
+        setTimeout(() => {
+            document.querySelector("#eapps-tripadvisor-reviews-2fb0e2ba-3d20-45dd-a6d7-04bd01bd462c > div > div > div > div.WidgetBackground__ContentContainer-sc-1ho7q3r-1.jUKeJm > div > a").style.display = "none"
+        }, 3000)
+
+
+
     }
 
 }
@@ -462,7 +472,6 @@ export default {
 
         <a href="http://wa.me/393200133882" target="_blank">
             <i class="fa-brands fa-whatsapp"></i>
-
         </a>
     </div>
 

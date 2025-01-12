@@ -304,6 +304,13 @@ export default {
         }
 
     },
+    computed: {
+
+        returnPage() {
+            window.history.go(-1)
+        }
+
+    },
     mounted() {
         const prevBtns = document.querySelectorAll('.btn-previous');
         const nextBtns = document.querySelectorAll('.btn-next');
@@ -377,6 +384,13 @@ export default {
 <template>
 
     <div class="layout_reservation">
+
+        <div class="return_page" @click="returnPage">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            <span>
+                Torna indietro
+            </span>
+        </div>
 
         <form action="" class="form" @submit.prevent="check_form()">
 
@@ -517,6 +531,21 @@ export default {
 }
 
 /* Global */
+
+.return_page {
+    cursor: pointer;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background-color: #BE9639;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+
+    &:hover{
+        background-color: #865f02;
+    }
+}
 
 label {
 

@@ -50,7 +50,22 @@ export default {
   </section>
   <!-- /#jumbotron -->
 
-  <h1>About</h1>
+  <section id="about_us">
+    <div class="container">
+      <div class="left">
+        <img src="../../public/img/sea.jpg" alt="">
+      </div>
+      <div class="right">
+        <h3>Chi siamo?</h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat debitis esse nihil ratione velit eaque
+          dolorum vitae, similique atque quibusdam ut repellendus consectetur fuga quo pariatur dolore, saepe
+          accusantium quis?
+        </p>
+      </div>
+    </div>
+
+  </section>
 
   <FooterApp />
 </template>

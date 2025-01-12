@@ -52,9 +52,11 @@ export default {
         non.
       </p>
 
-      <div class="btn_reserve">
-        Prenota ora!
-      </div>
+
+      <router-link class="btn_reserve" :to="{ name: 'reservation' }">
+        Prenota Ora!
+      </router-link>
+
     </div>
 
 

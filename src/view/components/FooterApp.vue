@@ -61,17 +61,22 @@ export default {
                     <div class="mt-4 d-flex gap-2 justify-content-center">
                         <!-- Facebook -->
                         <a type="button" class="btn_social"
-                            href="https://www.facebook.com/people/Rosmarino-Riccione/100091844406116/">
+                            href="https://www.facebook.com/people/Rosmarino-Riccione/100091844406116/" target="_blank">
                             <i class="fab fa-facebook-f"></i>
                         </a>
 
                         <!-- Twitter -->
-                        <a type="button" class="btn_social">
-                            <i class="fab fa-twitter"></i>
+                        <a type="button" class="btn_social"
+                            href="https://www.thefork.it/ristorante/ristorante-rosmarino-riccione-r802415"
+                            target="_blank">
+                            <div style="width: 23px; overflow: hidden;">
+                                <img src="../../../public/img/Thefork-logo-green.svg" alt="" style="width: 80px;">
+
+                            </div>
                         </a>
 
                         <!-- Instagram -->
-                        <a type="button" class="btn_social">
+                        <a type="button" class="btn_social" style="font-size: 23px;">
                             <i class="fab fa-instagram"></i>
                         </a>
 
@@ -86,7 +91,6 @@ export default {
 
                     <ul class="fa-ul" style="margin-left: 1.65em;">
                         <li class="mb-3" @click="openMap()" style="cursor: pointer;">
-
                             <span class="fa-li">
                                 <i class="fa-solid fa-location-dot"></i>
                             </span>
@@ -99,8 +103,15 @@ export default {
                                 class="ms-2">info@example.com</span>
                         </li>
                         <li class="mb-3">
-                            <span class="fa-li"><i class="fas fa-phone"></i></span><span class="ms-2">+39 376 154
-                                5557</span>
+                            <a href="callto:+39 37 61 54 55 57" style="text-decoration: none; color:#BE9639;">
+                                <span class="fa-li">
+                                    <i class="fas fa-phone"></i>
+                                </span>
+                                <span class="ms-2">+39 376 154
+                                    5557
+                                </span>
+                            </a>
+
                         </li>
                     </ul>
                 </div>

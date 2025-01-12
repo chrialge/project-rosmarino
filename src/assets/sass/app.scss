@@ -754,4 +754,38 @@
       cursor: pointer;
       text-decoration: none;
     }
-  }
+}
+
+#about_us{
+    padding: 40px 5px;
+    background-color: var(--first-bg-color);
+
+
+    &>.container{
+        display: flex;
+        align-items: center;
+        &>.left{
+            width: 60%;
+    
+            &>img{
+                width: 100%;
+            }
+        }
+    
+        &>.right{
+            width: 40%;
+            padding: 30px;
+
+            &>h3{
+                padding-bottom: 10px;
+                color: var(--first-color-text);
+            }
+
+            &>p{
+                color: white;
+            }
+        }
+    }
+
+
+}
