@@ -216,6 +216,14 @@ export default {
     <!-- /.container_dessert_plate_menu -->
   </section>
 
+
+  <div class="whatapp">
+
+    <a href="http://wa.me/393200133882" target="_blank">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+
   <FooterApp />
 
 

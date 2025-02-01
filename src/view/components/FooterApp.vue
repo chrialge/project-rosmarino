@@ -145,8 +145,8 @@ export default {
         <!-- Grid container -->
 
         <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2024 Christian Algieri
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); font-size: 10px;">
+            © 2025 Ristornate Rosmarino - denominazione sociale - Viale Trento Trieste 61, 47838 Riccione Italia - P.iva
         </div>
         <!-- Copyright -->
     </footer>

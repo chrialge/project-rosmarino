@@ -90,7 +90,6 @@ export default {
 
         },
         hide_name_error(element, error) {
-            console.log('ciao')
             const input = document.getElementById(element);
             const errorEl = document.getElementById(error);
             const regex = /[^a-z']/
@@ -167,7 +166,7 @@ export default {
 
                 const url = this.base_api_url + "api/customers";
                 axios.post(url, data).then((response) => {
-                    console.log(response)
+
 
                     if (response.data.success == true) {
                         document.getElementById("popup").style.visibility = "visible";
@@ -175,6 +174,15 @@ export default {
                         document.querySelector(".popup-inner").style.bottom = "0vw";
                         document.querySelector(".popup-inner").style.right = "0vh";
                         document.querySelector(".popup-inner").style.transform = "rotate(0)";
+
+
+                        this.name = '';
+                        this.last_name = '';
+                        this.birth_day = '';
+                        this.date = '';
+                        this.email = '';
+                        this.telephone = '';
+                        this.loading = false;
                     }
 
 
@@ -204,7 +212,6 @@ export default {
                 return "Nato il ..."
 
             } else {
-                console.log(this.date)
 
                 const date = new Date(this.date);
 

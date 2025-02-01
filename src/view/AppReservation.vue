@@ -208,7 +208,7 @@ export default {
             } else if (!this.check_person()) {
                 this.errorDate = false;
             } else {
-                console.log(this.date)
+
 
                 const year = getYear(this.date);
                 const month = getMonth(this.date) + 1;
@@ -243,7 +243,7 @@ export default {
 
                     this.loading = false;
                     if (response.data.success === true) {
-                        console.log(response)
+
 
 
                         this.customer_name = '';
@@ -329,7 +329,6 @@ export default {
                         this.updateFormStep(formSteps, formStepsNum, false);
                         this.updateProgressBar(progressSteps, formStepsNum);
                     } else {
-                        console.log('ciao')
                         this.check_name('customer_name', 'error_js_name');
                         this.check_name('customer_last_name', 'error_js_last_name');
                     }
@@ -542,7 +541,7 @@ export default {
     border-radius: 5px;
     color: white;
 
-    &:hover{
+    &:hover {
         background-color: #865f02;
     }
 }
