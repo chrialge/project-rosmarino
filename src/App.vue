@@ -7,11 +7,17 @@ export default {
   name: "App",
   watch: {
     $route(to, from) {
+      to.meta.from = from;
+
+
+
 
       if (to.fullPath !== "/reservation") {
+
+
         this.loading = true;
         if (document.readyState === "complete") {
-          console.log(document.readyState + "if")
+
           setTimeout(() => {
             this.loading = false
           }, 3000)
@@ -35,6 +41,8 @@ export default {
         }
       } else {
         this.loading = false;
+
+
       }
 
     }
@@ -42,16 +50,17 @@ export default {
   data() {
     return {
       loading: true,
+
     }
   },
   components: {
     LoadingApp
   },
-
-  mounted() {
+  methods: {
 
 
   },
+
 
 }
 </script>

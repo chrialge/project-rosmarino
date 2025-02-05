@@ -100,15 +100,15 @@ export default {
                         </li>
                         <li class="mb-3">
                             <span class="fa-li"><i class="fas fa-envelope"></i></span><span
-                                class="ms-2">info@example.com</span>
+                                class="ms-2">rosmarinoriccione@gmail.com</span>
                         </li>
                         <li class="mb-3">
                             <a href="callto:+39 37 61 54 55 57" style="text-decoration: none; color:#BE9639;">
                                 <span class="fa-li">
                                     <i class="fas fa-phone"></i>
                                 </span>
-                                <span class="ms-2">+39 376 154
-                                    5557
+                                <span class="ms-2">
+                                    +39 376 154 5557
                                 </span>
                             </a>
 
@@ -146,7 +146,8 @@ export default {
 
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2); font-size: 10px;">
-            © 2025 Ristornate Rosmarino - denominazione sociale - Viale Trento Trieste 61, 47838 Riccione Italia - P.iva
+            © 2025 Ristornate Rosmarino - Rosmarino s.n.c di Binda Alessandro e Ronchi Madalena - Viale Trento Trieste
+            61, 47838 Riccione Italia - P.iva
         </div>
         <!-- Copyright -->
     </footer>

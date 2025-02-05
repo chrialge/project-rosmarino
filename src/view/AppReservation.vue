@@ -4,21 +4,19 @@ import { ref } from 'vue';
 
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { getMonth, getYear, getDate } from 'date-fns';
+import { getMonth, getYear, getDate, lastDayOfMonth, getTime } from 'date-fns';
 import axios from 'axios';
 
 
 
 
-const datevar = ref(new Date())
+
+
 
 export default {
     name: 'AppReservation',
     data() {
         return {
-            newDate: datevar,
-            startTime: { hours: 12, minutes: 30 },
-            minTime: { hours: 12, minutes: 30 },
             base_api_url: 'http://127.0.0.1:8000/',
             customer_name: '',
             customer_last_name: '',
@@ -29,24 +27,79 @@ export default {
             loading: false,
             success: false,
             errors: false,
-            errorDate: true,
-            isRange: [
-                { hours: 15, minutes: '*' }, // disable full hour
-                { hours: 16, minutes: '*' },
-                { hours: 16, minutes: '*' },
-                { hours: 17, minutes: '*' },
-                { hours: 18, minutes: '*' },
-                { hours: 23, minutes: 30 },
-                { hours: 23, minutes: 45 },
-                { hours: 0, minutes: 0 },
-
-            ],
+            month: null,
+            year: null,
+            day: null,
+            dayName: null,
         }
     },
+
     methods: {
+        getToday() {
+            const monthYearEl = document.querySelector('.month_year');
+            const datetxtEl = document.querySelector('.date_txt');
+
+            let dmObj = {
+                days: [
+                    "Lunedì",
+                    "Martedì",
+                    "Mercoledì",
+                    "Giovedì",
+                    "Venerdì",
+                    "Sabato",
+                    "Domenica"
+                ],
+                month: [
+                    "Gennaio",
+                    "Febbraio",
+                    "Marzo",
+                    "Aprile",
+                    "Maggio",
+                    "Giugno",
+                    "Luglio",
+                    "Agosto",
+                    "Settembre",
+                    "Ottobre",
+                    "Novembre",
+                    "Dicembre"
+                ]
+            }
+
+            this.date = new Date();
+            this.dayName = dmObj.days[this.date.getDay() - 1];
+            this.month = this.date.getMonth();
+            this.day = this.date.getDate();
+
+
+            datetxtEl.innerHTML = `${this.dayName},${this.day},${dmObj.month[this.month]}, ${this.year}`;
+            monthYearEl.innerHTML = `${dmObj.month[this.month]} ${this.year}`;
+
+            const dateBtn = document.querySelectorAll('.day_list');
+
+            if (document.querySelector('.active')) {
+                document.querySelector('.active').classList.replace('active', 'date_btn');
+            }
+
+            dateBtn.forEach((btn) => {
+
+
+                if (btn.textContent == this.day) {
+                    btn.classList.replace('date_btn', 'active');
+                }
+            })
+        },
+        getTime() {
+            console.log(this.dayName)
+        },
+
+        returnPage() {
+
+            const path = this.$route.meta.from;
+            this.$router.push(path.path)
+        },
         updateFormStep(Steps, index) {
 
-
+            
             Steps.forEach((Step) => {
                 Step.classList.contains("form-step-active") && Step.classList.remove("form-step-active")
             })
@@ -283,35 +336,174 @@ export default {
 
 
         },
-        format() {
 
-
-            if (this.date == "") {
-                return "Prenotato il ...."
-            } else {
-
-                const date = new Date(this.date);
-
-                const day = date.getDate();
-                const month = date.getMonth() + 1;
-                const year = date.getFullYear();
-
-                const hours = date.getHours();
-                const minutes = date.getMinutes();
-
-                return `${day}/${month}/${year} alle ore ${hours}:${minutes}`
-            }
-        }
-
-    },
-    computed: {
-
-        returnPage() {
-            window.history.go(-1)
-        }
 
     },
     mounted() {
+
+        const datetxtEl = document.querySelector('.date_txt');
+        const dateEl = document.querySelector('.dates');
+        const btnEl = document.querySelectorAll('.calendar_heading > .fa-solid');
+        const monthYearEl = document.querySelector('.month_year');
+
+        let dmObj = {
+            days: [
+                "Lunedì",
+                "Martedì",
+                "Mercoledì",
+                "Giovedì",
+                "Venerdì",
+                "Sabato",
+                "Domenica"
+            ],
+            month: [
+                "Gennaio",
+                "Febbraio",
+                "Marzo",
+                "Aprile",
+                "Maggio",
+                "Giugno",
+                "Luglio",
+                "Agosto",
+                "Settembre",
+                "Ottobre",
+                "Novembre",
+                "Dicembre"
+            ]
+        }
+
+
+        this.date = new Date();
+        this.dayName = dmObj.days[this.date.getDay() - 1];
+        this.month = this.date.getMonth();
+
+        this.year = this.date.getFullYear();
+        this.day = this.date.getDate();
+        setTimeout(() => {
+            datetxtEl.innerHTML = `${this.dayName},${this.day},${dmObj.month[this.month]}, ${this.year}`;
+
+        }, 100)
+
+
+        const displayCalendar = () => {
+            let firstDayofMonth = new Date(this.year, this.month, 0).getDay();
+
+            let lastDateofLastMonth = new Date(this.year, this.month, 0).getDate();
+            let lastDateOfMonth = new Date(this.year, this.month + 1, 0).getDate();
+            let lastDayMonth = new Date(this.year, this.month, lastDateOfMonth).getDay();
+
+            let days = "";
+
+
+            for (let i = firstDayofMonth; i > 0; i--) {
+
+                days += `<li class="dummy">${lastDateofLastMonth - i + 1}</li>`
+            }
+
+            for (let i = 1; i <= lastDateOfMonth; i++) {
+
+
+                let checkToday = i === this.date.getDate() && this.month === new Date().getMonth() && this.year === new Date().getFullYear() ? "active" : 'date_btn';
+
+
+                days += `<li class="${checkToday} day_list" click="confirmDate()">${i}</li>`;
+
+            }
+
+            for (let i = lastDayMonth; i < 7; i++) {
+                days += `<li class="dummy">${i - lastDayMonth + 1}</li>`;
+            }
+
+
+            dateEl.innerHTML = days;
+            monthYearEl.innerHTML = `${dmObj.month[this.month]} ${this.year}`
+
+            const dateBtn = document.querySelectorAll('.day_list');
+
+            dateBtn.forEach((btn) => {
+                btn.addEventListener('click', () => {
+
+
+
+
+                    if (document.querySelector('.active')) {
+                        document.querySelector('.active').classList.replace('active', 'date_btn');
+                    }
+
+
+
+
+                    const dateForText = new Date(this.year, this.month, btn.textContent);
+                    this.date = dateForText;
+
+
+                    this.dayName = dmObj.days[dateForText.getDay() - 1];
+
+                    datetxtEl.innerHTML = `${this.dayName},${btn.textContent},${dmObj.month[this.month]}, ${this.year}`
+
+                    btn.classList.replace('date_btn', 'active');
+                   
+                })
+            })
+
+        }
+
+        displayCalendar();
+
+
+        btnEl.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+
+
+                if (btn.id === "prev") {
+                    let monthggg = new Date().getMonth();
+                    let yearggg = new Date().getFullYear();
+                    if (this.month === 1) {
+                        this.month = btn.id === "prev" ? this.month - 1 : this.month + 1;
+
+                    }
+                    if (monthggg > this.month && yearggg >= this.year) {
+                        e.preventDefault();
+
+                    } else {
+                        console.log('grig')
+                        this.month = btn.id === "prev" ? this.month - 1 : this.month + 1;
+                        if (this.month < 0 || this.month > 11) {
+                            this.day = new Date(this.year, this.month, new Date().getDate());
+
+                            this.month = this.day.getMonth();
+                            this.year = this.day.getFullYear();
+
+                        } else {
+                            this.day = new Date();
+                        }
+                        displayCalendar();
+                    }
+
+                } else {
+                    this.month = btn.id === "prev" ? this.month - 1 : this.month + 1;
+                    if (this.month < 0 || this.month > 11) {
+                        this.day = new Date(this.year, this.month, new Date().getDate());
+
+                        this.month = this.day.getMonth();
+                        this.year = this.day.getFullYear();
+
+                    } else {
+                        this.day = new Date();
+                    }
+                    displayCalendar();
+                }
+
+
+
+
+            })
+        })
+
+
+
+
+
         const prevBtns = document.querySelectorAll('.btn-previous');
         const nextBtns = document.querySelectorAll('.btn-next');
         const progress = document.getElementById('progress');
@@ -344,6 +536,10 @@ export default {
                         this.check_email()
 
                     }
+
+                } else {
+                    formStepsNum++;
+                    this.updateFormStep(formSteps, formStepsNum, false);
 
                 }
 
@@ -384,7 +580,7 @@ export default {
 
     <div class="layout_reservation">
 
-        <div class="return_page" @click="returnPage">
+        <div class="return_page" @click="returnPage()">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
             <span>
                 Torna indietro
@@ -410,6 +606,15 @@ export default {
 
             <!-- step -->
             <div class="form-step form-step-active">
+
+
+                <div class="time_container">
+
+                    
+                </div>
+
+
+
                 <div class="input_group">
                     <label for="customer_name">Nome</label>
                     <input type="text" name="customer_name" id="customer_name"
@@ -470,13 +675,83 @@ export default {
             </div>
 
             <div class="form-step ">
-                <div class="input_group">
-                    <VueDatePicker v-model="date" :min-date="new Date()" :min-time="minTime" :start-time="startTime"
-                        minutes-increment="15" locale="it" :disabled-times="isRange" :state="errorDate"
-                        :disabled-week-days="[1]" :format="format" placeholder="Ora e Data *" cancelText="Cancella"
-                        selectText="Seleziona">
-                    </VueDatePicker>
+
+                <div class="calendar">
+                    <div class="calendar_inner">
+                        <div class="calendar_controls">
+                            <div class="calendar_heading">
+                                <i class="fa-solid fa-arrow-left" id="prev"></i>
+                                <h2 class="month_year"></h2>
+                                <i class="fa-solid fa-arrow-right" id="next"></i>
+                            </div>
+                            <div class="current_datetime">
+                                <p class="day_txt" @click="getToday()">Oggi</p>
+                                <p class="date_txt">Tue, 10, Oct 2023</p>
+
+                            </div>
+
+                            <div class="days_date">
+                                <ul class="days">
+                                    <li>Lun</li>
+                                    <li>Mar</li>
+                                    <li>Mer</li>
+                                    <li>Gio</li>
+                                    <li>Ven</li>
+                                    <li>Sab</li>
+                                    <li>Dom</li>
+                                </ul>
+                                <ul class="dates">
+                                    <li class="active">1</li>
+                                    <li class="dummy">2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li>10</li>
+                                    <li>11</li>
+                                    <li>12</li>
+                                    <li>13</li>
+                                    <li>14</li>
+                                    <li>15</li>
+                                    <li>16</li>
+                                    <li>17</li>
+                                    <li>18</li>
+                                    <li>19</li>
+                                    <li>20</li>
+                                    <li>21</li>
+                                    <li>22</li>
+                                    <li>23</li>
+                                    <li>24</li>
+                                    <li>25</li>
+                                    <li>26</li>
+                                    <li>27</li>
+                                    <li>28</li>
+                                    <li>29</li>
+                                    <li>30</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
+
+                <div class="btns_group">
+                    <a href="#" class="btn_a btn-previous">
+                        Indietro
+                    </a>
+                    <a href="#" class="btn_a btn-next " @click="getTime()">
+                        Avanti
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="form-step ">
+
 
                 <div class="input_group">
                     <label for="person">Persone</label>
@@ -527,6 +802,7 @@ export default {
     display: grid;
     place-items: center;
     min-height: 100vh;
+    padding: 50px 5px 5px;
 }
 
 /* Global */
@@ -534,8 +810,8 @@ export default {
 .return_page {
     cursor: pointer;
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 10px;
+    right: 10px;
     background-color: #BE9639;
     padding: 5px 10px;
     border-radius: 5px;
@@ -648,9 +924,7 @@ input {
 
 /* form */
 
-.layout_reservation {
-    padding: 5px;
-}
+
 
 .form {
     background-color: #BE9639;

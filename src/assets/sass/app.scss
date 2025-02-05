@@ -170,7 +170,7 @@
 
 #jumbotron{
     background-image: url('./../../../public/img/sea.jpg');
-    height: 100vh;
+    height: calc(100vh - 80px);
     background-repeat: no-repeat;
     background-size: cover;
     display: flex;
@@ -484,6 +484,7 @@
                 transition: all 0.3s linear;
     
                 &>h4{
+                    font-size: 30px;
                     top: 10px;
                     position: absolute;
                     z-index: 10;
@@ -516,7 +517,7 @@
                 }
 
                 &:hover h4{
-                    font-size: 30px;
+                    font-size: 37px;
                 }
 
     
@@ -536,7 +537,7 @@
 .whatapp{
     position: fixed;
     right: 30px;
-    bottom: 30px;
+    bottom: 45px;
     z-index: 999;
 
     &>a{
@@ -831,7 +832,149 @@
                 color: white;
             }
         }
+
+        @media(max-width: 500px){
+            flex-wrap: wrap;
+            &>.left{
+                width: 100%;
+            }
+            &>.right{
+                width: 100%;
+            }
+        }
     }
 
 
 }
+
+$calendar-current-date-color: #1b1f21;
+$calendar-today-color: linear-gradient(to bottom, #03a9f4, #2196f3);
+$calendar-dummy-color: #505050;
+$calendar-current-date-hover-color: #b3b3b3;
+$calendar-border-bottom-color: #404040;
+$calendar-font-color: #fff;
+$calendar-bg-color: #262829;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.calendar{
+    font-family: "poppins", sans-serif;
+    background-color: var(--first-bg-color);
+    color: var(--first-color-text);
+    border-radius: 5px;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 5px 5px 10px $calendar-bg-color;
+
+    &>.calendar_inner{
+        margin-bottom: 20px;
+
+        &>.calendar_controls{
+            padding: 5px;
+
+            &>.calendar_heading{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 1rem 0;
+
+                &>i{
+                    cursor: pointer;
+                    font-size: 1.2rem;
+                }
+            }
+
+            &>.current_datetime{
+                gap: 3px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: $calendar-current-date-color;
+                padding: 0.7rem;
+                margin-bottom: 1rem;
+                border-radius:5px;
+                &>p{
+                    margin: 0;
+                }
+
+                &>.day_txt{
+                    background-color: green;
+                    cursor: pointer;
+                    color: $calendar-font-color;
+                    border-radius: 5px;
+                    padding: 0.5rem 1rem;
+                }
+            }
+
+            &>.days_date {
+
+                &>ul{
+                    padding: 0;
+                    list-style: none;
+                }
+
+                &>.days, &>.dates{
+                    display: grid;
+                    grid-template-columns: repeat(7, 0.9fr);
+                    text-align: center;
+
+                }
+
+                &>.days{
+
+                    &>li{
+                        border-bottom: 2px solid var(--first-color-text);
+                        margin: 0 0.2rem;
+                    }
+                }
+
+
+                &>.dates{
+                    margin-top: 1rem;
+
+                    &>li{
+                        padding: 0.5rem;
+                        margin: 0.2rem;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        border-radius: 5px;
+                        color: var(--first-color-text);
+
+                        &:hover{
+                            background-color: $calendar-current-date-hover-color;
+                            color: $calendar-bg-color;
+                        }
+                    }
+
+
+
+                    &>.active{
+                        background: rgb(3,169,244);
+                        background: linear-gradient(94deg, rgba(3,169,244,1) 0%, rgba(33,150,243,1) 100%);
+                        color: $calendar-font-color;
+
+                    }
+
+                    &>.dummy{
+                        color: $calendar-dummy-color;
+
+                        &:hover{
+                        color: $calendar-dummy-color;
+                        background-color: transparent;
+
+                        }
+                    }
+                }
+            }
+            
+
+
+
+        }
+    }
+}
+
+
+
