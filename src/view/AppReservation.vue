@@ -99,7 +99,7 @@ export default {
         },
         updateFormStep(Steps, index) {
 
-            
+
             Steps.forEach((Step) => {
                 Step.classList.contains("form-step-active") && Step.classList.remove("form-step-active")
             })
@@ -341,11 +341,23 @@ export default {
     },
     mounted() {
 
+        /**
+         * sezione calendario
+         */
+
+        // il testo della data 
         const datetxtEl = document.querySelector('.date_txt');
+
+        // 
         const dateEl = document.querySelector('.dates');
+
+        // bottoni del calendario che fa passare il mese
         const btnEl = document.querySelectorAll('.calendar_heading > .fa-solid');
+
+        // scrita sopra dove ce solo il mese e l'anno
         const monthYearEl = document.querySelector('.month_year');
 
+        // oggetto con i nomi dei mesi e dell'anno
         let dmObj = {
             days: [
                 "Lunedì",
@@ -372,93 +384,137 @@ export default {
             ]
         }
 
-
+        // salvo la data di oggi nell'istanza
         this.date = new Date();
+
+        // salvo il nome del giorno
         this.dayName = dmObj.days[this.date.getDay() - 1];
+
+        // salvo il numero del mese
         this.month = this.date.getMonth();
 
+        // salvo l'anno
         this.year = this.date.getFullYear();
+
+        // salvo il numero del giorno
         this.day = this.date.getDate();
+
+        // aspetto che prende tutti i dati
         setTimeout(() => {
+            // faccio comparire la data in forma completa
             datetxtEl.innerHTML = `${this.dayName},${this.day},${dmObj.month[this.month]}, ${this.year}`;
 
         }, 100)
 
-
+        // funzione che mostra la il calendario 
         const displayCalendar = () => {
+
+            // prendo il primo giorno del mese
             let firstDayofMonth = new Date(this.year, this.month, 0).getDay();
 
+            // prendo l'ultima data del mese scorso
             let lastDateofLastMonth = new Date(this.year, this.month, 0).getDate();
+
+            // prendo l'ultima data del mese corrente
             let lastDateOfMonth = new Date(this.year, this.month + 1, 0).getDate();
+
+            // prendo l'ultio giorno del mese
             let lastDayMonth = new Date(this.year, this.month, lastDateOfMonth).getDay();
 
+            // inizializzo days
             let days = "";
 
-
+            // ciclo dal primo giorno del mese all'indietro per il mese scorso
             for (let i = firstDayofMonth; i > 0; i--) {
 
+                // tutti i giorni del mese precedente fino a lunedi
                 days += `<li class="dummy">${lastDateofLastMonth - i + 1}</li>`
             }
 
+            // itero per tutti i giorni del mese
             for (let i = 1; i <= lastDateOfMonth; i++) {
 
-
+                // metto la classe active del giorno today
                 let checkToday = i === this.date.getDate() && this.month === new Date().getMonth() && this.year === new Date().getFullYear() ? "active" : 'date_btn';
 
-
+                // tutti i giorni del mese
                 days += `<li class="${checkToday} day_list" click="confirmDate()">${i}</li>`;
 
             }
 
+            // itereo dall'ultimo giorno al mese fino a domenica
             for (let i = lastDayMonth; i < 7; i++) {
+
+                // tutti i giorni del mese prossimo fino a domenica
                 days += `<li class="dummy">${i - lastDayMonth + 1}</li>`;
             }
 
-
+            // inserisco il template dei giorni
             dateEl.innerHTML = days;
+
+            // inserisco il giorno e il mese
             monthYearEl.innerHTML = `${dmObj.month[this.month]} ${this.year}`
 
+            // salvo tutti i giorni
             const dateBtn = document.querySelectorAll('.day_list');
 
+            // prendo tutte le date
             dateBtn.forEach((btn) => {
+
+                // al click del bottone
                 btn.addEventListener('click', () => {
 
 
 
-
+                    // tolgo active se ul elemento ce l'a
                     if (document.querySelector('.active')) {
                         document.querySelector('.active').classList.replace('active', 'date_btn');
                     }
 
 
 
-
+                    // cambio la data
                     const dateForText = new Date(this.year, this.month, btn.textContent);
+
+                    // salvo la data selezionata
                     this.date = dateForText;
 
-
+                    // prendo il nome della data
                     this.dayName = dmObj.days[dateForText.getDay() - 1];
 
+                    // mostro la nuovo data
                     datetxtEl.innerHTML = `${this.dayName},${btn.textContent},${dmObj.month[this.month]}, ${this.year}`
 
+                    // rimpiazzo la classe della data selezionata in active
                     btn.classList.replace('date_btn', 'active');
-                   
+
                 })
             })
 
         }
 
+        // invoco la funzione
         displayCalendar();
 
-
+        // bottoni per cambiare mese
         btnEl.forEach((btn) => {
+
+            // al click di uno dei bottoni
             btn.addEventListener('click', (e) => {
 
-
+                // controlla se il suo id e prev
                 if (btn.id === "prev") {
+
+                    // prendo il mese
                     let monthggg = new Date().getMonth();
+
+                    // prendo l'anno
                     let yearggg = new Date().getFullYear();
+
+                    // se il mese e 1
                     if (this.month === 1) {
+
+                        // 
                         this.month = btn.id === "prev" ? this.month - 1 : this.month + 1;
 
                     }
@@ -499,6 +555,77 @@ export default {
 
             })
         })
+
+        const timeGet = () => {
+            const hours = new Date().getHours();
+            const minutes = new Date().getMinutes();
+            const dateNow = new Date();
+            const dateSave = new Date(this.date);
+            let timesStart = '';
+            const gg = new Date();
+            const dd = new Date();
+            gg.setUTCHours(11, 30, 0, 0)
+            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes()}</li>`
+
+            for (let i = 0; i < 10; i++) {
+                gg.setMilliseconds(900000)
+                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                console.log(gg.getMinutes())
+            }
+
+            gg.setUTCHours(18, 0, 0, 0)
+            for (let i = 0; i < 15; i++) {
+
+                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                gg.setMilliseconds(900000)
+                console.log(gg.getMinutes())
+            }
+
+            const timeContainer = document.getElementById('time_list');
+            timeContainer.innerHTML = timesStart;
+
+            const timeCircle = document.querySelectorAll('.time_circle');
+            timeCircle.forEach((time) => {
+                time.addEventListener('click', () => {
+                    if (document.querySelector('.active_time')) {
+                        document.querySelector('.active_time').classList.remove('active_time')
+                    }
+                    document.getElementById('time_range').value = time.textContent
+                    time.classList.add('active_time')
+                })
+            })
+
+
+            const bell = new Date(gg.getTime());
+
+            console.log(timesStart)
+            if (dateNow.getDate() === dateSave.getDate()) {
+
+                if (hours >= 15 && minutes >= 0) {
+
+                } else if (hours >= 12 && minutes >= 0) {
+                    if (hours == 12 && minutes <= 30) {
+
+
+                    } else {
+                        if (minutes <= 15) {
+
+
+                        } else if (minutes <= 30) {
+
+                        } else if (minutes <= 45) {
+
+                        } else {
+
+                        }
+                    }
+
+                }
+            }
+        }
+
+        timeGet();
+
 
 
 
@@ -609,10 +736,56 @@ export default {
 
 
                 <div class="time_container">
+                    <ul id="time_list">
+                        <li class="time_circle active" v-for="n in 5">
+                            12:30
+                        </li>
+                        <li class="time_circle">
+                            12:45
+                        </li>
+                        <li class="time_circle">
+                            13:00
+                        </li>
+                        <li class="time_circle">
+                            13:15
+                        </li>
+                        <li class="time_circle">
+                            13:30
+                        </li>
+                        <li class="time_circle">
+                            13:45
+                        </li>
+                        <li class="time_circle">
+                            14:00
+                        </li>
+                        <li class="time_circle">
+                            14:15
+                        </li>
+                        <li class="time_circle">
+                            14:30
+                        </li>
+                        <li class="time_circle">
+                            14:45
+                        </li>
+                        <li class="time_circle">
+                            15:00
+                        </li>
+                        <li class="time_circle">
+                            19:00
+                        </li>
+                        <li class="time_circle">
+                            19:15
+                        </li>
+                        <li class="time_circle">
+                            19:30
+                        </li>
+                    </ul>
 
-                    
                 </div>
 
+                <input type="time" name="time" id="time_range" disabled>
+
+                
 
 
                 <div class="input_group">

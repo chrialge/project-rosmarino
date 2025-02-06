@@ -977,4 +977,46 @@ $calendar-bg-color: #262829;
 }
 
 
+.time_container{
+    height: 150px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+
+
+    &::-webkit-scrollbar {
+        width: 0.4rem;
+        background-color: hsl(228, 8%, 85%);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: hsl(228, 8%, 75%);
+    }
+
+
+    &>ul{
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        &>.time_circle{
+            cursor: pointer;
+            padding: 17px 10px;
+            border-radius: 50%;
+            background-color: #262829;
+            color: #fff;
+
+            &:hover{
+                background-color: var(--hover-color);
+            }
+
+
+        }
+
+        .active_time{
+            background-color: #074799;
+        }
+        
+    }
+}
 
