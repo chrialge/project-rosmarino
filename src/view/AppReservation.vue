@@ -17,6 +17,7 @@ export default {
     name: 'AppReservation',
     data() {
         return {
+            time: '',
             base_api_url: 'http://127.0.0.1:8000/',
             customer_name: '',
             customer_last_name: '',
@@ -90,6 +91,10 @@ export default {
         },
         getTime() {
             console.log(this.dayName)
+        },
+
+        numberPerson(element) {
+            console.log(element)
         },
 
         returnPage() {
@@ -631,6 +636,7 @@ export default {
 
 
 
+
         const prevBtns = document.querySelectorAll('.btn-previous');
         const nextBtns = document.querySelectorAll('.btn-next');
         const progress = document.getElementById('progress');
@@ -783,9 +789,35 @@ export default {
 
                 </div>
 
-                <input type="time" name="time" id="time_range" disabled>
+                <div class="input_group">
+                    <label for="time">Orario di prenotazione</label>
+                    <input type="time" name="time" id="time_range" v-model="time" disabled>
 
-                
+                    <span id="error_js_time" class="text-danger" style="display: none;">
+                        clicca l'orario che preferisco
+                    </span>
+                </div>
+
+                <div class="person_container">
+                    <div class="container_number_person text-center">
+                        <h5>Per quante persone?</h5>
+                        <ul>
+                            <li class=" number_person" v-for="n in 8" @click="numberPerson($event)">{{ 1 + n }}
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="input_group">
+                        <label for="person">Persone</label>
+                        <input type="number" name="person" id="person" @keyup="hide_error_person()"
+                            @blur="check_person()" placeholder="7" v-model="person">
+                        <span id="error_js_person" class="text-danger" style="display: none;">
+                            Il numero di persone non valido
+                        </span>
+                    </div>
+                </div>
+
+
 
 
                 <div class="input_group">
