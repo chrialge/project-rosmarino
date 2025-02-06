@@ -305,17 +305,8 @@ export default {
                 const month = getMonth(this.date) + 1;
                 const day = getDate(this.date);
 
-                let hours = this.date.getHours();
-                if (hours.length == 1) {
-                    hours = '0' + this.date.getHours();
-                }
-                let minutes = this.date.getMinutes();
-                if (minutes.length == 1) {
-                    minutes = '0' + this.date.getMinutes();
-                }
-                let seconds = '00';
                 const dateFormat = `${year}-${month}-${day}`;
-                const timeFormat = `${hours}:${minutes}:${seconds}`;
+
 
 
                 const data = {
@@ -323,14 +314,15 @@ export default {
                     customer_last_name: this.customer_last_name,
                     customer_email: this.customer_email,
                     customer_telephone: this.customer_telephone,
-                    hour_reservation: timeFormat,
+                    hour_reservation: this.time,
                     date: dateFormat,
                     person: this.person
                 }
+                console.log(data);
 
                 const url = this.base_api_url + 'api/reservation';
                 axios.post(url, data).then((response) => {
-
+                    console.log(response)
 
                     this.loading = false;
                     if (response.data.success === true) {
@@ -601,38 +593,15 @@ export default {
             const dateSave = new Date(this.date);
             let timesStart = '';
             const gg = new Date();
-            const dd = new Date();
-            gg.setUTCHours(11, 30, 0, 0)
-            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes()}</li>`
 
-            for (let i = 0; i < 10; i++) {
-                gg.setMilliseconds(900000)
-                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
 
-            }
 
-            gg.setUTCHours(18, 0, 0, 0)
-            for (let i = 0; i < 15; i++) {
 
-                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
-                gg.setMilliseconds(900000)
-
-            }
 
             const timeContainer = document.getElementById('time_list');
-            timeContainer.innerHTML = timesStart;
 
-            const timeCircle = document.querySelectorAll('.time_circle');
-            timeCircle.forEach((time) => {
-                time.addEventListener('click', () => {
-                    if (document.querySelector('.active_time')) {
-                        document.querySelector('.active_time').classList.remove('active_time')
-                    }
-                    document.getElementById('time_range').value = time.textContent
-                    time.classList.add('active_time')
-                    this.time = time;
-                })
-            })
+
+
 
 
             const bell = new Date(gg.getTime());
@@ -642,28 +611,172 @@ export default {
 
                 if (hours >= 15 && minutes >= 0) {
 
+
+                    gg.setUTCHours(18, 0, 0, 0)
+                    for (let i = 0; i < 15; i++) {
+
+                        timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                        gg.setMilliseconds(900000)
+
+                    }
+
                 } else if (hours >= 12 && minutes >= 0) {
+
                     if (hours == 12 && minutes <= 30) {
+                        gg.setUTCHours(11, 30, 0, 0)
+                        timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes()}</li>`
+                        for (let i = 0; i < 10; i++) {
+                            gg.setMilliseconds(900000)
+                            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                        }
+
+                        gg.setUTCHours(18, 0, 0, 0)
+                        for (let i = 0; i < 15; i++) {
+
+                            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                            gg.setMilliseconds(900000)
+
+                        }
 
 
                     } else {
                         if (minutes <= 15) {
 
+                            const dateSet = new Date();
+                            dateSet.setUTCHours(dateSet.getHours(), 15, 0, 0)
+                            timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
+                            for (let i = 0; i < 10; i++) {
+                                dateSet.setMilliseconds(900000)
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+
+                            }
+
+                            dateSet.setUTCHours(18, 0, 0, 0)
+                            for (let i = 0; i < 15; i++) {
+
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+                                dateSet.setMilliseconds(900000)
+
+                            }
+
+
 
                         } else if (minutes <= 30) {
 
+                            const dateSet = new Date();
+                            dateSet.setUTCHours(dateSet.getHours(), 30, 0, 0)
+                            timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
+                            for (let i = 0; i < 10; i++) {
+                                dateSet.setMilliseconds(900000)
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+
+                            }
+
+                            dateSet.setUTCHours(18, 0, 0, 0)
+                            for (let i = 0; i < 15; i++) {
+
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+                                dateSet.setMilliseconds(900000)
+
+                            }
+
                         } else if (minutes <= 45) {
 
+                            const dateSet = new Date();
+                            dateSet.setUTCHours(dateSet.getHours(), 45, 0, 0)
+                            timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
+                            for (let i = 0; i < 10; i++) {
+                                dateSet.setMilliseconds(900000)
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+
+                            }
+
+                            dateSet.setUTCHours(18, 0, 0, 0)
+                            for (let i = 0; i < 15; i++) {
+
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+                                dateSet.setMilliseconds(900000)
+
+                            }
                         } else {
 
+                            const dateSet = new Date();
+                            dateSet.setUTCHours((dateSet.getHours() + 1), 0, 0, 0)
+                            timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
+                            for (let i = 0; i < 10; i++) {
+                                dateSet.setMilliseconds(900000)
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+
+                            }
+
+                            dateSet.setUTCHours(18, 0, 0, 0)
+                            for (let i = 0; i < 15; i++) {
+
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+                                dateSet.setMilliseconds(900000)
+
+                            }
                         }
                     }
 
+                } else {
+
+                    gg.setUTCHours(11, 30, 0, 0)
+                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes()}</li>`
+                    for (let i = 0; i < 10; i++) {
+                        gg.setMilliseconds(900000)
+                        timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                    }
+
+                    gg.setUTCHours(18, 0, 0, 0)
+                    for (let i = 0; i < 15; i++) {
+
+                        timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                        gg.setMilliseconds(900000)
+
+                    }
                 }
+
+                timeContainer.innerHTML = timesStart;
+            } else {
+
+                gg.setUTCHours(11, 30, 0, 0)
+                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes()}</li>`
+                for (let i = 0; i < 10; i++) {
+                    gg.setMilliseconds(900000)
+                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                }
+
+                gg.setUTCHours(18, 0, 0, 0)
+                for (let i = 0; i < 15; i++) {
+
+                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                    gg.setMilliseconds(900000)
+
+                }
+
+                timeContainer.innerHTML = timesStart;
             }
         }
 
         timeGet();
+
+        const timeCircle = document.querySelectorAll('.time_circle');
+        timeCircle.forEach((time) => {
+            time.addEventListener('click', () => {
+                if (document.querySelector('.active_time')) {
+                    document.querySelector('.active_time').classList.remove('active_time')
+
+                }
+                console.log(time.textContent)
+                document.getElementById('time_range').value = time.textContent
+                time.classList.add('active_time')
+                this.time = time.textContent
+            })
+        })
 
 
 
@@ -1047,32 +1160,37 @@ export default {
 
 
                 <div class="container_riepilogo">
+                    <h3 class="text-center">Riepilogo</h3>
+                    <div class="container_data_riepilogo">
+                        <div class="name">
+                            <b>Nome:</b>
+                            <span>{{ this.customer_name + ' ' +
+                                this.customer_last_name }}</span>
 
-                    <div class="name">
-                        <b>Nome:</b>
-                        <span>{{ this.customer_name + ' ' + this.customer_last_name }}</span>
+                        </div>
 
+
+                        <div class="telephone">
+                            <b>Telefono:</b>
+                            <span>{{ this.customer_telephone }}</span>
+
+                        </div>
+
+                        <div class="email">
+                            <b>Email:</b>
+                            <span>{{ this.customer_email }}</span>
+                        </div>
+
+                        <div class="description">
+                            <b>Descrizione:</b>
+                            <span>Prenotato alle {{ this.time }} del {{ new Date(this.date).getDate() + '/' + new
+                                Date(this.date).getMonth() + '/' +
+                                new Date(this.date).getHours() }} per {{ this.person }}
+                            </span>
+                        </div>
                     </div>
 
 
-                    <div class="telephone">
-                        <b>Telefono:</b>
-                        <span>{{ this.customer_telephone }}</span>
-
-                    </div>
-
-                    <div class="email">
-                        <b>Email:</b>
-                        <span>{{ this.customer_email }}</span>
-                    </div>
-
-                    <div class="description">
-                        <b>Descrizione:</b>
-                        <span>Prenotato alle {{ this.time }} del {{ new Date(this.date).getDate() + '/' + new
-                            Date(this.date).getMonth() + '/' +
-                            new Date(this.date).getHours() }} per {{ this.person }}
-                        </span>
-                    </div>
                 </div>
 
                 <div class="btns_group">

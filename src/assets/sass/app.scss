@@ -1051,3 +1051,27 @@ $calendar-bg-color: #262829;
         }
     }
 }
+
+.container_riepilogo{
+
+    &>h3{
+        color:var(--first-bg-color);
+        padding-bottom: 20px;
+    }
+
+    &>.container_data_riepilogo{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding-bottom: 30px;
+
+        &>*{
+            &>b{
+                color: var(--first-bg-color);
+                padding-right: 5px;
+            }
+        }
+    }
+
+
+}
