@@ -94,7 +94,12 @@ export default {
         },
 
         numberPerson(element) {
-            console.log(element)
+            if (document.querySelector('.active_person')) {
+                document.querySelector('.active_person').classList.remove('active_person');
+            }
+            document.getElementById('person').value = element.target.textContent
+            element.target.classList.add('active_person')
+            this.person = element.target.textContent;
         },
 
         returnPage() {
@@ -195,6 +200,25 @@ export default {
             const regex = /[^0-9']/;
             const value = input.value.trim();
 
+            const buttonPerson = document.querySelectorAll('.number_person');
+
+
+            if (value > 9 || value < 2) {
+                if (document.querySelector('.active_person')) {
+                    document.querySelector('.active_person').classList.remove('active_person');
+                }
+            } else {
+                buttonPerson.forEach((btn) => {
+                    if (btn.textContent == value) {
+                        if (document.querySelector('.active_person')) {
+                            document.querySelector('.active_person').classList.remove('active_person');
+                        }
+                        btn.classList.add('active_person')
+                    }
+                })
+            }
+
+
             if (parseInt(value) < 0 || parseInt(value) > 100 || value.match(regex)) {
                 input.style.borderColor = 'red';
                 errorEl.style.display = '';
@@ -256,6 +280,15 @@ export default {
                 }
             }
 
+        },
+
+        hide_error_person() {
+            const input = document.getElementById('person');
+            const errorEl = document.getElementById('error_js_person');
+            const regex = /[^0-9']/;
+            const value = input.value.trim();
+
+            console.log(input);
         },
         check_form() {
             this.loading = true;
@@ -575,7 +608,7 @@ export default {
             for (let i = 0; i < 10; i++) {
                 gg.setMilliseconds(900000)
                 timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
-                console.log(gg.getMinutes())
+
             }
 
             gg.setUTCHours(18, 0, 0, 0)
@@ -583,7 +616,7 @@ export default {
 
                 timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
                 gg.setMilliseconds(900000)
-                console.log(gg.getMinutes())
+
             }
 
             const timeContainer = document.getElementById('time_list');
@@ -597,13 +630,14 @@ export default {
                     }
                     document.getElementById('time_range').value = time.textContent
                     time.classList.add('active_time')
+                    this.time = time;
                 })
             })
 
 
             const bell = new Date(gg.getTime());
 
-            console.log(timesStart)
+
             if (dateNow.getDate() === dateSave.getDate()) {
 
                 if (hours >= 15 && minutes >= 0) {
@@ -738,6 +772,7 @@ export default {
 
 
             <!-- step -->
+            <!-- nome e cognome -->
             <div class="form-step form-step-active">
 
 
@@ -792,30 +827,12 @@ export default {
                 <div class="input_group">
                     <label for="time">Orario di prenotazione</label>
                     <input type="time" name="time" id="time_range" v-model="time" disabled>
-
                     <span id="error_js_time" class="text-danger" style="display: none;">
                         clicca l'orario che preferisco
                     </span>
                 </div>
 
-                <div class="person_container">
-                    <div class="container_number_person text-center">
-                        <h5>Per quante persone?</h5>
-                        <ul>
-                            <li class=" number_person" v-for="n in 8" @click="numberPerson($event)">{{ 1 + n }}
-                            </li>
-                        </ul>
 
-                    </div>
-                    <div class="input_group">
-                        <label for="person">Persone</label>
-                        <input type="number" name="person" id="person" @keyup="hide_error_person()"
-                            @blur="check_person()" placeholder="7" v-model="person">
-                        <span id="error_js_person" class="text-danger" style="display: none;">
-                            Il numero di persone non valido
-                        </span>
-                    </div>
-                </div>
 
 
 
@@ -849,6 +866,7 @@ export default {
 
             </div>
 
+            <!-- telefono email -->
             <div class="form-step ">
                 <div class="input_group">
                     <label for="customer_telephone">Telefono</label>
@@ -879,6 +897,7 @@ export default {
                 </div>
             </div>
 
+            <!-- calendario -->
             <div class="form-step ">
 
                 <div class="calendar">
@@ -955,16 +974,105 @@ export default {
 
             </div>
 
+            <!-- time -->
             <div class="form-step ">
 
 
-                <div class="input_group">
-                    <label for="person">Persone</label>
-                    <input type="number" name="person" id="person" @keyup="hide_error_person()" @blur="check_person()"
-                        placeholder="7" v-model="person">
-                    <span id="error_js_person" class="text-danger" style="display: none;">
-                        Il numero di persone non valido
-                    </span>
+                <div class="person_container">
+                    <div class="container_number_person text-center">
+                        <h5>Per quante persone?</h5>
+                        <ul>
+                            <li class=" number_person" v-for="n in 8" @click="numberPerson($event)">{{ 1 + n }}
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="input_group">
+                        <label for="person">Persone</label>
+                        <input type="number" name="person" id="person" @keyup="hide_error_person()"
+                            @blur="check_person()" placeholder="7" v-model="person">
+                        <span id="error_js_person" class="text-danger" style="display: none;">
+                            Il numero di persone non valido
+                        </span>
+                    </div>
+                </div>
+
+                <div class="btns_group">
+                    <a href="#" class="btn_a btn-previous">
+                        Indietro
+                    </a>
+                    <a href="#" class="btn_a btn-next ">
+                        Avanti
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- person -->
+            <div class="form-step ">
+
+
+                <div class="person_container">
+                    <div class="container_number_person text-center">
+                        <h5>Per quante persone?</h5>
+                        <ul>
+                            <li class=" number_person" v-for="n in 8" @click="numberPerson($event)">{{ 1 + n }}
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="input_group">
+                        <label for="person">Persone</label>
+                        <input type="number" name="person" id="person" @keyup="hide_error_person()"
+                            @blur="check_person()" placeholder="7" v-model="person">
+                        <span id="error_js_person" class="text-danger" style="display: none;">
+                            Il numero di persone non valido
+                        </span>
+                    </div>
+                </div>
+
+                <div class="btns_group">
+                    <a href="#" class="btn_a btn-previous">
+                        Indietro
+                    </a>
+                    <a href="#" class="btn_a btn-next ">
+                        Avanti
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- riepilogo -->
+            <div class="form-step ">
+
+
+                <div class="container_riepilogo">
+
+                    <div class="name">
+                        <b>Nome:</b>
+                        <span>{{ this.customer_name + ' ' + this.customer_last_name }}</span>
+
+                    </div>
+
+
+                    <div class="telephone">
+                        <b>Telefono:</b>
+                        <span>{{ this.customer_telephone }}</span>
+
+                    </div>
+
+                    <div class="email">
+                        <b>Email:</b>
+                        <span>{{ this.customer_email }}</span>
+                    </div>
+
+                    <div class="description">
+                        <b>Descrizione:</b>
+                        <span>Prenotato alle {{ this.time }} del {{ new Date(this.date).getDate() + '/' + new
+                            Date(this.date).getMonth() + '/' +
+                            new Date(this.date).getHours() }} per {{ this.person }}
+                        </span>
+                    </div>
                 </div>
 
                 <div class="btns_group">
@@ -975,6 +1083,7 @@ export default {
                         <span v-if="loading == false">Conferma</span>
                         <span v-if="loading == true">Attendi...</span>
                     </button>
+
                 </div>
 
             </div>
