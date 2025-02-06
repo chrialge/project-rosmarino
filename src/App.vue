@@ -5,9 +5,22 @@ import LoadingApp from './view/components/LoadingApp.vue';
 
 export default {
   name: "App",
+  data() {
+    return {
+      loading: true,
+      path: null,
+    }
+  },
   watch: {
     $route(to, from) {
-      to.meta.from = from;
+      console.log(to.path)
+      if (from.path !== "/reservation") {
+        to.meta.from = from;
+        this.path = from
+      } else {
+        to.meta.from = this.path
+      }
+
 
 
 
@@ -44,12 +57,6 @@ export default {
 
 
       }
-
-    }
-  },
-  data() {
-    return {
-      loading: true,
 
     }
   },
