@@ -295,19 +295,11 @@ export default {
 
     <section id="jumbotron">
         <div class="container_jumbo">
-            <h1>
-                Ristorante Rosmarino
-            </h1>
+            <div class="logo_container">
+                <img src="../../public/img/logo-black.png" alt="">
+            </div>
 
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, suscipit voluptas nam cupiditate
-                magnam
-                quam,
-                omnis odio accusantium adipisci excepturi ducimus id doloremque fugiat labore dolorum reiciendis,
-                molestiae
-                eius
-                non.
-            </p>
+
 
 
             <router-link class="btn_reserve" :to="{ name: 'reservation' }">
@@ -330,7 +322,7 @@ export default {
         <div class="container_menu_card">
             <router-link class="container_entre_plate" :to="{ name: 'menu' }">
                 <div class="container_card">
-                    <h4>Menu Antipasti</h4>
+                    <h4>Antipasti</h4>
                     <img src="../../public/img/entre.png" alt="">
                 </div>
             </router-link>
@@ -338,21 +330,21 @@ export default {
 
             <router-link class="container_first_plate" :to="{ name: 'menu' }">
                 <div class="container_card">
-                    <h4>Menu Primi</h4>
+                    <h4>Primi</h4>
                     <img src="../../public/img/entre.png" alt="">
                 </div>
             </router-link>
 
             <router-link class="container_second_plate" :to="{ name: 'menu' }">
                 <div class="container_card">
-                    <h4>Menu Secondi</h4>
+                    <h4>Secondi</h4>
                     <img src="../../public/img/entre.png" alt="">
                 </div>
             </router-link>
 
             <router-link class="container_dessert_plate" :to="{ name: 'menu' }">
                 <div class="container_card">
-                    <h4>Menu Dessert</h4>
+                    <h4>Dessert</h4>
                     <img src="../../public/img/entre.png" alt="">
                 </div>
             </router-link>
@@ -477,7 +469,7 @@ export default {
 
     <div class="whatapp">
 
-        <a href="http://wa.me/393200133882" target="_blank">
+        <a href="http://wa.me/393761545557" target="_blank">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
     </div>

@@ -4,21 +4,20 @@ import { ref } from 'vue';
 
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { getMonth, getYear, getDate } from 'date-fns';
+import { getMonth, getYear, getDate, lastDayOfMonth, getTime } from 'date-fns';
 import axios from 'axios';
 
 
 
 
-const datevar = ref(new Date())
+
+
 
 export default {
     name: 'AppReservation',
     data() {
         return {
-            newDate: datevar,
-            startTime: { hours: 12, minutes: 30 },
-            minTime: { hours: 12, minutes: 30 },
+            time: '',
             base_api_url: 'http://127.0.0.1:8000/',
             customer_name: '',
             customer_last_name: '',
@@ -29,21 +28,283 @@ export default {
             loading: false,
             success: false,
             errors: false,
-            errorDate: true,
-            isRange: [
-                { hours: 15, minutes: '*' }, // disable full hour
-                { hours: 16, minutes: '*' },
-                { hours: 16, minutes: '*' },
-                { hours: 17, minutes: '*' },
-                { hours: 18, minutes: '*' },
-                { hours: 23, minutes: 30 },
-                { hours: 23, minutes: 45 },
-                { hours: 0, minutes: 0 },
-
-            ],
+            month: null,
+            year: null,
+            day: null,
+            dayName: null,
         }
     },
+
     methods: {
+        getToday() {
+            const monthYearEl = document.querySelector('.month_year');
+            const datetxtEl = document.querySelector('.date_txt');
+
+            let dmObj = {
+                days: [
+                    "Lunedì",
+                    "Martedì",
+                    "Mercoledì",
+                    "Giovedì",
+                    "Venerdì",
+                    "Sabato",
+                    "Domenica"
+                ],
+                month: [
+                    "Gennaio",
+                    "Febbraio",
+                    "Marzo",
+                    "Aprile",
+                    "Maggio",
+                    "Giugno",
+                    "Luglio",
+                    "Agosto",
+                    "Settembre",
+                    "Ottobre",
+                    "Novembre",
+                    "Dicembre"
+                ]
+            }
+
+            this.date = new Date();
+            this.dayName = dmObj.days[this.date.getDay() - 1];
+            this.month = this.date.getMonth();
+            this.day = this.date.getDate();
+
+
+
+            datetxtEl.innerHTML = `${this.dayName},${this.day},${dmObj.month[this.month]}, ${this.year}`;
+            monthYearEl.innerHTML = `${dmObj.month[this.month]} ${this.year}`;
+
+            const dateBtn = document.querySelectorAll('.day_list');
+
+            if (document.querySelector('.active')) {
+                document.querySelector('.active').classList.replace('active', 'date_btn');
+            }
+
+            dateBtn.forEach((btn) => {
+
+
+                if (btn.textContent == this.day) {
+                    btn.classList.replace('date_btn', 'active');
+                }
+            })
+        },
+        getTime() {
+            this.timeGet()
+        },
+        timeGet() {
+            const hours = new Date().getHours();
+            const minutes = new Date().getMinutes();
+            const dateNow = new Date();
+            const dateSave = new Date(this.date);
+            let timesStart = '';
+            const gg = new Date();
+
+
+
+
+
+            const timeContainer = document.getElementById('time_list');
+
+            if (this.dayName == 'Domenica') {
+                if (dateNow.getDate() === dateSave.getDate()) {
+
+                    if (hours >= 15 && minutes >= 0) {
+
+
+                        gg.setUTCHours(18, 0, 0, 0)
+                        for (let i = 0; i < 15; i++) {
+
+                            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                            gg.setMilliseconds(900000)
+
+                        }
+
+                    } else if (hours >= 12 && minutes >= 0) {
+
+                        if (hours == 12 && minutes <= 30) {
+                            gg.setUTCHours(11, 30, 0, 0)
+                            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes()}</li>`
+                            for (let i = 0; i < 10; i++) {
+                                gg.setMilliseconds(900000)
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                            }
+
+                            gg.setUTCHours(18, 0, 0, 0)
+                            for (let i = 0; i < 15; i++) {
+
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                gg.setMilliseconds(900000)
+
+                            }
+
+
+                        } else {
+                            if (minutes <= 15) {
+
+                                const dateSet = new Date();
+                                dateSet.setUTCHours(dateSet.getHours(), 15, 0, 0)
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
+                                for (let i = 0; i < 10; i++) {
+                                    dateSet.setMilliseconds(900000)
+                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+
+                                }
+
+                                dateSet.setUTCHours(18, 0, 0, 0)
+                                for (let i = 0; i < 15; i++) {
+
+                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+                                    dateSet.setMilliseconds(900000)
+
+                                }
+
+
+
+                            } else if (minutes <= 30) {
+
+                                const dateSet = new Date();
+                                dateSet.setUTCHours(dateSet.getHours(), 30, 0, 0)
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
+                                for (let i = 0; i < 10; i++) {
+                                    dateSet.setMilliseconds(900000)
+                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+
+                                }
+
+                                dateSet.setUTCHours(18, 0, 0, 0)
+                                for (let i = 0; i < 15; i++) {
+
+                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+                                    dateSet.setMilliseconds(900000)
+
+                                }
+
+                            } else if (minutes <= 45) {
+
+                                const dateSet = new Date();
+                                dateSet.setUTCHours(dateSet.getHours(), 45, 0, 0)
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
+                                for (let i = 0; i < 10; i++) {
+                                    dateSet.setMilliseconds(900000)
+                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+
+                                }
+
+                                dateSet.setUTCHours(18, 0, 0, 0)
+                                for (let i = 0; i < 15; i++) {
+
+                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+                                    dateSet.setMilliseconds(900000)
+
+                                }
+                            } else {
+
+                                const dateSet = new Date();
+                                dateSet.setUTCHours((dateSet.getHours() + 1), 0, 0, 0)
+                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
+                                for (let i = 0; i < 10; i++) {
+                                    dateSet.setMilliseconds(900000)
+                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+
+                                }
+
+                                dateSet.setUTCHours(18, 0, 0, 0)
+                                for (let i = 0; i < 15; i++) {
+
+                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
+                                    dateSet.setMilliseconds(900000)
+
+                                }
+                            }
+                        }
+
+                    } else {
+
+                        gg.setUTCHours(11, 30, 0, 0)
+                        timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes()}</li>`
+                        for (let i = 0; i < 10; i++) {
+                            gg.setMilliseconds(900000)
+                            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                        }
+
+                        gg.setUTCHours(18, 0, 0, 0)
+                        for (let i = 0; i < 15; i++) {
+
+                            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                            gg.setMilliseconds(900000)
+
+                        }
+                    }
+
+                    timeContainer.innerHTML = timesStart;
+                } else {
+
+                    gg.setUTCHours(11, 30, 0, 0)
+                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes()}</li>`
+                    for (let i = 0; i < 10; i++) {
+                        gg.setMilliseconds(900000)
+                        timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                    }
+
+                    gg.setUTCHours(18, 0, 0, 0)
+                    for (let i = 0; i < 15; i++) {
+
+                        timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                        gg.setMilliseconds(900000)
+
+                    }
+
+                    timeContainer.innerHTML = timesStart;
+                }
+            } else {
+
+                gg.setUTCHours(18, 0, 0, 0)
+                for (let i = 0; i < 15; i++) {
+
+                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                    gg.setMilliseconds(900000)
+
+                }
+                timeContainer.innerHTML = timesStart;
+            }
+
+            const timeCircle = document.querySelectorAll('.time_circle');
+            timeCircle.forEach((time) => {
+                time.addEventListener('click', () => {
+                    if (document.querySelector('.active_time')) {
+                        document.querySelector('.active_time').classList.remove('active_time')
+
+                    }
+                    console.log(time.textContent)
+                    document.getElementById('time_range').value = time.textContent
+                    time.classList.add('active_time')
+                    this.time = time.textContent
+                })
+            })
+
+
+        },
+
+        numberPerson(element) {
+            if (document.querySelector('.active_person')) {
+                document.querySelector('.active_person').classList.remove('active_person');
+            }
+            document.getElementById('person').value = element.target.textContent
+            element.target.classList.add('active_person')
+            this.person = element.target.textContent;
+        },
+
+        returnPage() {
+
+
+            const path = this.$route.meta.from;
+            this.$router.push(path.path)
+        },
         updateFormStep(Steps, index) {
 
 
@@ -137,6 +398,25 @@ export default {
             const regex = /[^0-9']/;
             const value = input.value.trim();
 
+            const buttonPerson = document.querySelectorAll('.number_person');
+
+
+            if (value > 9 || value < 2) {
+                if (document.querySelector('.active_person')) {
+                    document.querySelector('.active_person').classList.remove('active_person');
+                }
+            } else {
+                buttonPerson.forEach((btn) => {
+                    if (btn.textContent == value) {
+                        if (document.querySelector('.active_person')) {
+                            document.querySelector('.active_person').classList.remove('active_person');
+                        }
+                        btn.classList.add('active_person')
+                    }
+                })
+            }
+
+
             if (parseInt(value) < 0 || parseInt(value) > 100 || value.match(regex)) {
                 input.style.borderColor = 'red';
                 errorEl.style.display = '';
@@ -199,6 +479,15 @@ export default {
             }
 
         },
+
+        hide_error_person() {
+            const input = document.getElementById('person');
+            const errorEl = document.getElementById('error_js_person');
+            const regex = /[^0-9']/;
+            const value = input.value.trim();
+
+            console.log(input);
+        },
         check_form() {
             this.loading = true;
 
@@ -214,17 +503,8 @@ export default {
                 const month = getMonth(this.date) + 1;
                 const day = getDate(this.date);
 
-                let hours = this.date.getHours();
-                if (hours.length == 1) {
-                    hours = '0' + this.date.getHours();
-                }
-                let minutes = this.date.getMinutes();
-                if (minutes.length == 1) {
-                    minutes = '0' + this.date.getMinutes();
-                }
-                let seconds = '00';
                 const dateFormat = `${year}-${month}-${day}`;
-                const timeFormat = `${hours}:${minutes}:${seconds}`;
+
 
 
                 const data = {
@@ -232,14 +512,15 @@ export default {
                     customer_last_name: this.customer_last_name,
                     customer_email: this.customer_email,
                     customer_telephone: this.customer_telephone,
-                    hour_reservation: timeFormat,
+                    hour_reservation: this.time,
                     date: dateFormat,
                     person: this.person
                 }
+                console.log(data);
 
                 const url = this.base_api_url + 'api/reservation';
                 axios.post(url, data).then((response) => {
-
+                    console.log(response)
 
                     this.loading = false;
                     if (response.data.success === true) {
@@ -283,35 +564,255 @@ export default {
 
 
         },
-        format() {
 
-
-            if (this.date == "") {
-                return "Prenotato il ...."
-            } else {
-
-                const date = new Date(this.date);
-
-                const day = date.getDate();
-                const month = date.getMonth() + 1;
-                const year = date.getFullYear();
-
-                const hours = date.getHours();
-                const minutes = date.getMinutes();
-
-                return `${day}/${month}/${year} alle ore ${hours}:${minutes}`
-            }
-        }
-
-    },
-    computed: {
-
-        returnPage() {
-            window.history.go(-1)
-        }
 
     },
     mounted() {
+
+        /**
+         * sezione calendario
+         */
+
+        // il testo della data 
+        const datetxtEl = document.querySelector('.date_txt');
+
+        // 
+        const dateEl = document.querySelector('.dates');
+
+        // bottoni del calendario che fa passare il mese
+        const btnEl = document.querySelectorAll('.calendar_heading > .fa-solid');
+
+        // scrita sopra dove ce solo il mese e l'anno
+        const monthYearEl = document.querySelector('.month_year');
+
+        // oggetto con i nomi dei mesi e dell'anno
+        let dmObj = {
+            days: [
+                "Lunedì",
+                "Martedì",
+                "Mercoledì",
+                "Giovedì",
+                "Venerdì",
+                "Sabato",
+                "Domenica",
+            ],
+            month: [
+                "Gennaio",
+                "Febbraio",
+                "Marzo",
+                "Aprile",
+                "Maggio",
+                "Giugno",
+                "Luglio",
+                "Agosto",
+                "Settembre",
+                "Ottobre",
+                "Novembre",
+                "Dicembre"
+            ]
+        }
+
+        // salvo la data di oggi nell'istanza
+        this.date = new Date();
+
+        // salvo il nome del giorno
+        this.dayName = dmObj.days[this.date.getDay() - 1];
+
+        // salvo il numero del mese
+        this.month = this.date.getMonth();
+
+        // salvo l'anno
+        this.year = this.date.getFullYear();
+
+        // salvo il numero del giorno
+        this.day = this.date.getDate();
+
+        // aspetto che prende tutti i dati
+        setTimeout(() => {
+            // faccio comparire la data in forma completa
+            datetxtEl.innerHTML = `${this.dayName},${this.day},${dmObj.month[this.month]}, ${this.year}`;
+
+        }, 100)
+
+        // funzione che mostra la il calendario 
+        const displayCalendar = () => {
+
+            // prendo il primo giorno del mese
+            let firstDayofMonth = new Date(this.year, this.month, 0).getDay();
+
+            // prendo l'ultima data del mese scorso
+            let lastDateofLastMonth = new Date(this.year, this.month, 0).getDate();
+
+            // prendo l'ultima data del mese corrente
+            let lastDateOfMonth = new Date(this.year, this.month + 1, 0).getDate();
+
+            // prendo l'ultio giorno del mese
+            let lastDayMonth = new Date(this.year, this.month, lastDateOfMonth).getDay();
+
+            // inizializzo days
+            let days = "";
+
+            // ciclo dal primo giorno del mese all'indietro per il mese scorso
+            for (let i = firstDayofMonth; i > 0; i--) {
+
+                // tutti i giorni del mese precedente fino a lunedi
+                days += `<li class="dummy">${lastDateofLastMonth - i + 1}</li>`
+            }
+
+            // itero per tutti i giorni del mese
+            for (let i = 1; i <= lastDateOfMonth; i++) {
+
+                const dateToday = new Date();
+
+                if (dateToday.getHours() >= 22 && dateToday.getMonth() >= 0 && i == dateToday.getDate()) {
+                    days += `<li class="dummy" click="confirmDate()">${i}</li>`;
+
+                } else if (i >= dateToday.getDate() || this.month != dateToday.getMonth()) {
+                    // metto la classe active del giorno today
+                    let checkToday = i === this.date.getDate() && this.month === new Date().getMonth() && this.year === new Date().getFullYear() ? "active" : 'date_btn';
+
+
+                    // tutti i giorni del mese
+                    days += `<li class="${checkToday} day_list" click="confirmDate()">${i}</li>`;
+
+                } else {
+                    days += `<li class="dummy" click="confirmDate()">${i}</li>`;
+                }
+
+
+
+            }
+
+            // itereo dall'ultimo giorno al mese fino a domenica
+            for (let i = lastDayMonth; i < 7; i++) {
+
+                // tutti i giorni del mese prossimo fino a domenica
+                days += `<li class="dummy">${i - lastDayMonth + 1}</li>`;
+            }
+
+            // inserisco il template dei giorni
+            dateEl.innerHTML = days;
+
+            // inserisco il giorno e il mese
+            monthYearEl.innerHTML = `${dmObj.month[this.month]} ${this.year}`
+
+            // salvo tutti i giorni
+            const dateBtn = document.querySelectorAll('.day_list');
+
+            // prendo tutte le date
+            dateBtn.forEach((btn) => {
+
+                // al click del bottone
+                btn.addEventListener('click', () => {
+
+
+
+                    // tolgo active se ul elemento ce l'a
+                    if (document.querySelector('.active')) {
+                        document.querySelector('.active').classList.replace('active', 'date_btn');
+                    }
+
+
+
+                    // cambio la data
+                    const dateForText = new Date(this.year, this.month, btn.textContent);
+
+                    // salvo la data selezionata
+                    this.date = dateForText;
+
+                    // prendo il nome della data
+                    if (dateForText.getDay() == 0) {
+                        this.dayName = dmObj.days[6]
+                    } else {
+                        this.dayName = dmObj.days[dateForText.getDay() - 1];
+                    }
+
+
+
+                    // mostro la nuovo data
+                    datetxtEl.innerHTML = `${this.dayName},${btn.textContent},${dmObj.month[this.month]}, ${this.year}`
+
+                    // rimpiazzo la classe della data selezionata in active
+                    btn.classList.replace('date_btn', 'active');
+
+                })
+            })
+
+        }
+
+        // invoco la funzione
+        displayCalendar();
+
+        // bottoni per cambiare mese
+        btnEl.forEach((btn) => {
+
+            // al click di uno dei bottoni
+            btn.addEventListener('click', (e) => {
+
+                // controlla se il suo id e prev
+                if (btn.id === "prev") {
+
+                    // prendo il mese
+                    let monthggg = new Date().getMonth();
+
+                    // prendo l'anno
+                    let yearggg = new Date().getFullYear();
+
+                    // se il mese e 1
+                    if (this.month === 1) {
+
+                        // 
+                        this.month = btn.id === "prev" ? this.month - 1 : this.month + 1;
+
+                    }
+                    if (monthggg > this.month && yearggg >= this.year) {
+                        e.preventDefault();
+
+                    } else {
+                        console.log('grig')
+                        this.month = btn.id === "prev" ? this.month - 1 : this.month + 1;
+                        if (this.month < 0 || this.month > 11) {
+                            this.day = new Date(this.year, this.month, new Date().getDate());
+
+                            this.month = this.day.getMonth();
+                            this.year = this.day.getFullYear();
+
+                        } else {
+                            this.day = new Date();
+                        }
+                        displayCalendar();
+                    }
+
+                } else {
+                    this.month = btn.id === "prev" ? this.month - 1 : this.month + 1;
+                    if (this.month < 0 || this.month > 11) {
+                        this.day = new Date(this.year, this.month, new Date().getDate());
+
+                        this.month = this.day.getMonth();
+                        this.year = this.day.getFullYear();
+
+                    } else {
+                        this.day = new Date();
+                    }
+                    displayCalendar();
+                }
+
+
+
+
+            })
+        })
+
+
+
+
+
+
+
+
+
+
+
         const prevBtns = document.querySelectorAll('.btn-previous');
         const nextBtns = document.querySelectorAll('.btn-next');
         const progress = document.getElementById('progress');
@@ -345,6 +846,10 @@ export default {
 
                     }
 
+                } else {
+                    formStepsNum++;
+                    this.updateFormStep(formSteps, formStepsNum, false);
+
                 }
 
 
@@ -356,9 +861,17 @@ export default {
 
         prevBtns.forEach((btn) => {
             btn.addEventListener('click', () => {
-                formStepsNum--;
-                this.updateFormStep(formSteps, formStepsNum, true);
-                this.updateProgressBar(progressSteps, formStepsNum);
+
+                if (formStepsNum >= 3) {
+                    formStepsNum--;
+                    this.updateFormStep(formSteps, formStepsNum, true);
+                } else {
+                    formStepsNum--;
+                    this.updateFormStep(formSteps, formStepsNum, true);
+                    this.updateProgressBar(progressSteps, formStepsNum);
+                    console.log(formStepsNum);
+                }
+
 
             })
         })
@@ -384,7 +897,7 @@ export default {
 
     <div class="layout_reservation">
 
-        <div class="return_page" @click="returnPage">
+        <div class="return_page" @click="returnPage()">
             <i class="fa fa-arrow-left" aria-hidden="true"></i>
             <span>
                 Torna indietro
@@ -393,9 +906,9 @@ export default {
 
         <form action="" class="form" @submit.prevent="check_form()">
 
-            <h1 class="text_center text-color">
-                Form di Prenotazione
-            </h1>
+            <div class="logo_image">
+                <img src="../../public/img/logo-blue.png" alt="">
+            </div>
 
             <!-- progress-bar -->
             <div class="progress_bar">
@@ -409,7 +922,11 @@ export default {
 
 
             <!-- step -->
+            <!-- nome e cognome -->
             <div class="form-step form-step-active">
+
+
+
                 <div class="input_group">
                     <label for="customer_name">Nome</label>
                     <input type="text" name="customer_name" id="customer_name"
@@ -439,6 +956,7 @@ export default {
 
             </div>
 
+            <!-- telefono email -->
             <div class="form-step ">
                 <div class="input_group">
                     <label for="customer_telephone">Telefono</label>
@@ -469,22 +987,224 @@ export default {
                 </div>
             </div>
 
+            <!-- calendario -->
             <div class="form-step ">
-                <div class="input_group">
-                    <VueDatePicker v-model="date" :min-date="new Date()" :min-time="minTime" :start-time="startTime"
-                        minutes-increment="15" locale="it" :disabled-times="isRange" :state="errorDate"
-                        :disabled-week-days="[1]" :format="format" placeholder="Ora e Data *" cancelText="Cancella"
-                        selectText="Seleziona">
-                    </VueDatePicker>
+
+                <div class="calendar">
+                    <div class="calendar_inner">
+                        <div class="calendar_controls">
+                            <div class="calendar_heading">
+                                <i class="fa-solid fa-arrow-left" id="prev"></i>
+                                <h2 class="month_year"></h2>
+                                <i class="fa-solid fa-arrow-right" id="next"></i>
+                            </div>
+                            <div class="current_datetime">
+                                <p class="day_txt" @click="getToday()">Oggi</p>
+                                <p class="date_txt">Tue, 10, Oct 2023</p>
+
+                            </div>
+
+                            <div class="days_date">
+                                <ul class="days">
+                                    <li>Lun</li>
+                                    <li>Mar</li>
+                                    <li>Mer</li>
+                                    <li>Gio</li>
+                                    <li>Ven</li>
+                                    <li>Sab</li>
+                                    <li>Dom</li>
+                                </ul>
+                                <ul class="dates">
+                                    <li class="active">1</li>
+                                    <li class="dummy">2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>6</li>
+                                    <li>7</li>
+                                    <li>8</li>
+                                    <li>9</li>
+                                    <li>10</li>
+                                    <li>11</li>
+                                    <li>12</li>
+                                    <li>13</li>
+                                    <li>14</li>
+                                    <li>15</li>
+                                    <li>16</li>
+                                    <li>17</li>
+                                    <li>18</li>
+                                    <li>19</li>
+                                    <li>20</li>
+                                    <li>21</li>
+                                    <li>22</li>
+                                    <li>23</li>
+                                    <li>24</li>
+                                    <li>25</li>
+                                    <li>26</li>
+                                    <li>27</li>
+                                    <li>28</li>
+                                    <li>29</li>
+                                    <li>30</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="btns_group">
+                    <a href="#" class="btn_a btn-previous">
+                        Indietro
+                    </a>
+                    <a href="#" class="btn_a btn-next " @click="getTime()">
+                        Avanti
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- time -->
+            <div class="form-step ">
+
+
+                <div class="time_container">
+                    <ul id="time_list">
+                        <li class="time_circle active" v-for="n in 5">
+                            12:30
+                        </li>
+                        <li class="time_circle">
+                            12:45
+                        </li>
+                        <li class="time_circle">
+                            13:00
+                        </li>
+                        <li class="time_circle">
+                            13:15
+                        </li>
+                        <li class="time_circle">
+                            13:30
+                        </li>
+                        <li class="time_circle">
+                            13:45
+                        </li>
+                        <li class="time_circle">
+                            14:00
+                        </li>
+                        <li class="time_circle">
+                            14:15
+                        </li>
+                        <li class="time_circle">
+                            14:30
+                        </li>
+                        <li class="time_circle">
+                            14:45
+                        </li>
+                        <li class="time_circle">
+                            15:00
+                        </li>
+                        <li class="time_circle">
+                            19:00
+                        </li>
+                        <li class="time_circle">
+                            19:15
+                        </li>
+                        <li class="time_circle">
+                            19:30
+                        </li>
+                    </ul>
+
                 </div>
 
                 <div class="input_group">
-                    <label for="person">Persone</label>
-                    <input type="number" name="person" id="person" @keyup="hide_error_person()" @blur="check_person()"
-                        placeholder="7" v-model="person">
-                    <span id="error_js_person" class="text-danger" style="display: none;">
-                        Il numero di persone non valido
+                    <label for="time">Orario di prenotazione</label>
+                    <input type="time" name="time" id="time_range" v-model="time" disabled>
+                    <span id="error_js_time" class="text-danger" style="display: none;">
+                        clicca l'orario che preferisco
                     </span>
+                </div>
+
+                <div class="btns_group">
+                    <a href="#" class="btn_a btn-previous">
+                        Indietro
+                    </a>
+                    <a href="#" class="btn_a btn-next ">
+                        Avanti
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- person -->
+            <div class="form-step ">
+
+
+                <div class="person_container">
+                    <div class="container_number_person text-center">
+                        <h5>Per quante persone?</h5>
+                        <ul>
+                            <li class=" number_person" v-for="n in 8" @click="numberPerson($event)">{{ 1 + n }}
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="input_group">
+                        <label for="person">Persone</label>
+                        <input type="number" name="person" id="person" @keyup="hide_error_person()"
+                            @blur="check_person()" placeholder="7" v-model="person">
+                        <span id="error_js_person" class="text-danger" style="display: none;">
+                            Il numero di persone non valido
+                        </span>
+                    </div>
+                </div>
+
+                <div class="btns_group">
+                    <a href="#" class="btn_a btn-previous">
+                        Indietro
+                    </a>
+                    <a href="#" class="btn_a btn-next ">
+                        Avanti
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- riepilogo -->
+            <div class="form-step ">
+
+
+                <div class="container_riepilogo">
+                    <h3 class="text-center">Riepilogo</h3>
+                    <div class="container_data_riepilogo">
+                        <div class="name">
+                            <b>Nome:</b>
+                            <span>{{ this.customer_name + ' ' +
+                                this.customer_last_name }}</span>
+
+                        </div>
+
+
+                        <div class="telephone">
+                            <b>Telefono:</b>
+                            <span>{{ this.customer_telephone }}</span>
+
+                        </div>
+
+                        <div class="email">
+                            <b>Email:</b>
+                            <span>{{ this.customer_email }}</span>
+                        </div>
+
+                        <div class="description">
+                            <b>Descrizione:</b>
+                            <span>Prenotato alle {{ this.time }} del {{ new Date(this.date).getDate() + '/' +
+                                (new Date(this.date).getMonth() + 1) + '/' +
+                                new Date(this.date).getFullYear() }} per {{ this.person }} persone
+                            </span>
+                        </div>
+                    </div>
+
+
                 </div>
 
                 <div class="btns_group">
@@ -495,6 +1215,7 @@ export default {
                         <span v-if="loading == false">Conferma</span>
                         <span v-if="loading == true">Attendi...</span>
                     </button>
+
                 </div>
 
             </div>
@@ -527,6 +1248,7 @@ export default {
     display: grid;
     place-items: center;
     min-height: 100vh;
+    padding: 50px 5px 5px;
 }
 
 /* Global */
@@ -534,8 +1256,8 @@ export default {
 .return_page {
     cursor: pointer;
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 10px;
+    right: 10px;
     background-color: #BE9639;
     padding: 5px 10px;
     border-radius: 5px;
@@ -648,19 +1370,22 @@ input {
 
 /* form */
 
-.layout_reservation {
-    padding: 5px;
-}
+
 
 .form {
     background-color: #BE9639;
     max-width: 500px;
-    width: 100%;
-    margin: 0 auto;
+    width: 95%;
+    margin: 0 auto 30px;
     border: 1px solid #BE9639;
     border-radius: 0.35rem;
     padding: 1.5rem;
     box-shadow: 0 0 5px black;
+}
+
+.logo_image>img {
+    width: 100%;
+    padding-bottom: 20px;
 }
 
 .form-step {

@@ -5,13 +5,32 @@ import LoadingApp from './view/components/LoadingApp.vue';
 
 export default {
   name: "App",
+  data() {
+    return {
+      loading: true,
+      path: null,
+    }
+  },
   watch: {
     $route(to, from) {
+      console.log(to.path)
+      if (from.path !== "/reservation") {
+        to.meta.from = from;
+        this.path = from
+      } else {
+        to.meta.from = this.path
+      }
+
+
+
+
 
       if (to.fullPath !== "/reservation") {
+
+
         this.loading = true;
         if (document.readyState === "complete") {
-          console.log(document.readyState + "if")
+
           setTimeout(() => {
             this.loading = false
           }, 3000)
@@ -35,23 +54,20 @@ export default {
         }
       } else {
         this.loading = false;
+
+
       }
 
-    }
-  },
-  data() {
-    return {
-      loading: true,
     }
   },
   components: {
     LoadingApp
   },
-
-  mounted() {
+  methods: {
 
 
   },
+
 
 }
 </script>

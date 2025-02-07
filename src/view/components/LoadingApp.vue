@@ -50,7 +50,7 @@ export default {
 
 .loading-container {
     width: 100%;
-    max-width: 520px;
+    max-width: 400px;
     text-align: center;
     color: #BE9639;
     position: relative;
@@ -95,10 +95,10 @@ export default {
 }
 
 .loading-text {
-    font-size: 5vw;
+    font-size: 35px;
     line-height: 64px;
-    letter-spacing: 10px;
-    margin-bottom: 32px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-evenly;
 
