@@ -44,8 +44,8 @@ export default {
         max-width: 700px;
         text-align: center;
         box-shadow: 0 2px 24px hsla(228, 80%, 4%, 0.3);
-
-        padding: 20px;
+        width: 95%;
+        padding: 15px;
         border-radius: 40px;
         background-color: #BE9639;
 

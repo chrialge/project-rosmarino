@@ -80,7 +80,7 @@ export default {
     <header id="site_header">
         <nav class="container">
             <div class="logo">
-                <img src="./../../../public/img/logo-risto.png" alt="">
+                <img src="./../../../public/img/logo-white.png" alt="">
             </div>
             <div class="link">
                 <ul>
