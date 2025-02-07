@@ -36,7 +36,7 @@ export default {
 
 
                 setTimeout(() => {
-                    document.getElementById('btn_dropmenu').setAttribute('src', './../../../public/img/menu.svg')
+                    document.getElementById('btn_dropmenu').setAttribute('src', '/img/menu.svg')
                     document.getElementById('btn_dropmenu').style.transform = 'translateX(0)'
                 }, 300);
 
@@ -102,7 +102,7 @@ export default {
                 </ul>
             </div>
             <div class="btn-mobile">
-                <img id="btn_dropmenu" src="./../../../public/img/menu.svg" alt="" @click="openDropMenu()">
+                <img id="btn_dropmenu" src="/img/menu.svg" alt="" @click="openDropMenu()">
                 <div id="dropmenu" class="link_for_mobile">
                     <ul>
                         <li>

@@ -25,19 +25,11 @@ export default {
 
   <section id="jumbotron">
     <div class="container_jumbo">
-      <h1>
-        Ristorante Rosmarino
-      </h1>
+      <div class="logo_container">
+        <img src="../../public/img/logo-black.png" alt="">
+      </div>
 
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt, suscipit voluptas nam cupiditate
-        magnam
-        quam,
-        omnis odio accusantium adipisci excepturi ducimus id doloremque fugiat labore dolorum reiciendis,
-        molestiae
-        eius
-        non.
-      </p>
+
 
 
       <router-link class="btn_reserve" :to="{ name: 'reservation' }">
