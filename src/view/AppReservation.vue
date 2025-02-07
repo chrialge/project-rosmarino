@@ -663,10 +663,13 @@ export default {
             for (let i = 1; i <= lastDateOfMonth; i++) {
 
                 const dateToday = new Date();
+                console.log(dateToday.getDay())
 
                 if (dateToday.getHours() >= 22 && dateToday.getMonth() >= 0 && i == dateToday.getDate()) {
                     days += `<li class="dummy" click="confirmDate()">${i}</li>`;
 
+                } else if (new Date(this.year, this.month, i).getDay() == 1) {
+                    days += `<li class="dummy" click="confirmDate()">${i}</li>`;
                 } else if (i >= dateToday.getDate() || this.month != dateToday.getMonth()) {
                     // metto la classe active del giorno today
                     let checkToday = i === this.date.getDate() && this.month === new Date().getMonth() && this.year === new Date().getFullYear() ? "active" : 'date_btn';

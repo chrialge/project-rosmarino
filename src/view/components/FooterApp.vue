@@ -76,7 +76,8 @@ export default {
                         </a>
 
                         <!-- Instagram -->
-                        <a type="button" class="btn_social" style="font-size: 23px;">
+                        <a href="http://instagram.com/_u/rosmarino.riccione/" type="button" class="btn_social"
+                            target="_blank" style="font-size: 23px;">
                             <i class="fab fa-instagram"></i>
                         </a>
 
@@ -98,9 +99,12 @@ export default {
                                 Viale Trento Trieste 61, 47838 Riccione Italia
                             </span>
                         </li>
-                        <li class="mb-3">
-                            <span class="fa-li"><i class="fas fa-envelope"></i></span><span
-                                class="ms-2">rosmarinoriccione@gmail.com</span>
+                        <li class="mb-3" href="mailto:rosmarinoriccione@gmail.com">
+                            <a href="mailto:rosmarinoriccione@gmail.com" style="text-decoration: none; color:#BE9639;">
+                                <span class="fa-li"><i class="fas fa-envelope"></i></span><span
+                                    class="ms-2">rosmarinoriccione@gmail.com</span>
+                            </a>
+
                         </li>
                         <li class="mb-3">
                             <a href="callto:+39 37 61 54 55 57" style="text-decoration: none; color:#BE9639;">
@@ -128,12 +132,12 @@ export default {
                                 <td>chiuso</td>
                             </tr>
                             <tr>
-                                <td>Martedi - Mercoledi:</td>
+                                <td>Martedi - Sabato:</td>
                                 <td>19:30 - 22:30</td>
                             </tr>
                             <tr>
-                                <td>Giovedi - Domenica:</td>
-                                <td>12:00 - 14:00/ 19:30 - 22:30</td>
+                                <td>Domenica:</td>
+                                <td>12:00 - 14:30/ 19:30 - 22:30</td>
                             </tr>
                         </tbody>
                     </table>

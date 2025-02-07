@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:wght@300;400;500;600;700&display=swap');
 :root{
     --first-bg-color: #074799;
     --first-color-text: #BE9639;
@@ -582,8 +582,9 @@
         padding-bottom: 30px;
 
         &>h2{
-            margin-bottom: 25px;
+            margin-bottom: 35px;
             font-size: 35px;
+            font-family: "Poppins", serif;
         }
 
         &>ul{
@@ -591,7 +592,15 @@
             padding: 0;
 
             &>li{
-                margin-bottom: 10px;
+                margin-bottom: 15px;
+                font-family: "Poppins", serif;
+                font-weight: 300;
+
+                &>h5{
+                    font-family: "Poppins", serif;
+                    font-weight: 500;
+                    font-style: normal;
+                }
 
                 &>.description{
                     margin-bottom: 5px;
