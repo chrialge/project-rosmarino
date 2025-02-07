@@ -17,10 +17,10 @@ export default {
             if (this.dropmenuActive === false) {
                 this.dropmenuActive = true;
                 document.getElementById('dropmenu').style.display = 'block';
-                setTimeout(() => {
-                    document.getElementById('btn_dropmenu').setAttribute('src', './../../../public/img/close.svg')
-                    document.getElementById('btn_dropmenu').style.transform = 'translateX(0)'
-                }, 300);
+                document.getElementById('dropmenu').style.opacity = 0;
+                document.getElementById('btn_dropmenu_close').style.transform = 'translateX(0px)'
+                document.getElementById('btn_dropmenu_close').style.display = '';
+
 
                 setTimeout(() => {
 
@@ -33,12 +33,10 @@ export default {
 
             } else {
                 this.dropmenuActive = false;
+                console.log(document.getElementById('btn_dropmenu_close'))
 
 
-                setTimeout(() => {
-                    document.getElementById('btn_dropmenu').setAttribute('src', '/img/menu.svg')
-                    document.getElementById('btn_dropmenu').style.transform = 'translateX(0)'
-                }, 300);
+                document.getElementById('btn_dropmenu_close').style.transform = 'translateX(-200px)'
 
                 document.getElementById('dropmenu').style.opacity = '0';
                 document.getElementById('dropmenu').style.height = '0';
@@ -55,11 +53,12 @@ export default {
         closeDropMenu() {
             if (this.dropmenuActive === true) {
                 this.dropmenuActive = false;
+                document.getElementById('btn_dropmenu').style.transform = 'translateX(0)'
 
-                setTimeout(() => {
-                    document.getElementById('btn_dropmenu').setAttribute('src', './../../../public/img/menu.svg')
-                    document.getElementById('btn_dropmenu').style.transform = 'translateX(0)'
-                }, 300);
+                document.getElementById('btn_dropmenu_close').style.transform = 'translateX(200px)';
+                document.getElementById('btn_dropmenu_close').style.display = 'none';
+
+
 
                 document.getElementById('dropmenu').style.opacity = '0';
                 document.getElementById('dropmenu').style.height = '0';
@@ -103,6 +102,8 @@ export default {
             </div>
             <div class="btn-mobile">
                 <img id="btn_dropmenu" src="/img/menu.svg" alt="" @click="openDropMenu()">
+                <img id="btn_dropmenu_close" src="/img/close.svg" alt="" @click="closeDropMenu()"
+                    style="transform: translateX(200px); display: none;">
                 <div id="dropmenu" class="link_for_mobile">
                     <ul>
                         <li>
