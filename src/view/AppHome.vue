@@ -16,7 +16,7 @@ export default {
             date: "",
             email: "",
             telephone: "",
-            base_api_url: 'http://127.0.0.1:8000/',
+            base_api_url: 'https://backrosmarino.org/',
         }
     },
     components: {

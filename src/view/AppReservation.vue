@@ -591,12 +591,13 @@ export default {
             }
 
 
-            if (parseInt(value) < 0 || parseInt(value) > 100 || value.match(regex)) {
+            if (parseInt(value) < 0 || parseInt(value) > 100 || value.match(regex) || value == '') {
                 input.style.borderColor = 'red';
                 errorEl.style.display = '';
 
                 return false;
             } else {
+
                 return true;
             }
         },
@@ -653,14 +654,41 @@ export default {
             }
 
         },
-
         hide_error_person() {
             const input = document.getElementById('person');
             const errorEl = document.getElementById('error_js_person');
             const regex = /[^0-9']/;
             const value = input.value.trim();
 
-            console.log(input);
+            const buttonPerson = document.querySelectorAll('.number_person');
+
+            if (value > 9 || value < 2) {
+                if (document.querySelector('.active_person')) {
+                    document.querySelector('.active_person').classList.remove('active_person');
+                }
+            } else {
+                buttonPerson.forEach((btn) => {
+                    if (btn.textContent == value) {
+                        if (document.querySelector('.active_person')) {
+                            document.querySelector('.active_person').classList.remove('active_person');
+                        }
+                        btn.classList.add('active_person')
+                    }
+                })
+            }
+
+
+            if (parseInt(value) > 0 || parseInt(value) < 100) {
+
+                if (value.match(regex)) {
+
+                } else {
+                    input.style.borderColor = '';
+                    errorEl.style.display = 'none'
+                }
+            }
+
+
         },
         check_form() {
             this.loading = true;
@@ -726,26 +754,6 @@ export default {
 
 
         },
-        hide_error_person() {
-            const input = document.getElementById('person');
-            const errorEl = document.getElementById('error_js_person');
-            const regex = /[^0-9']/;
-            const value = input.value.trim();
-
-            if (parseInt(value) > 0 || parseInt(value) < 100) {
-
-                if (value.match(regex)) {
-
-                } else {
-                    input.style.borderColor = '';
-                    errorEl.style.display = 'none'
-                }
-            }
-
-
-        },
-
-
     },
     mounted() {
 
@@ -1095,18 +1103,7 @@ export default {
             })
         })
 
-        const date = new Date();
 
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        if (hours <= 22 && hours >= 15) {
-            let date = new Date();
-            this.startTime = { hours: 19, minutes: 30 };
-            this.minTime = { hours: 19, minutes: 30 };
-            this.minDate = date.setDate(date.getDate() + 1);
-
-
-        }
 
     }
 }
@@ -1369,8 +1366,8 @@ export default {
                     </div>
                     <div class="input_group">
                         <label for="person">Persone</label>
-                        <input type="number" name="person" id="person" @keyup="hide_error_person()"
-                            @blur="check_person()" placeholder="7" v-model="person">
+                        <input type="number" name="person" id="person" @blur="check_person()"
+                            @keyup="hide_error_person()" placeholder="7" v-model="person">
                         <span id="error_js_person" class="text-danger" style="display: none;">
                             Il numero di persone non valido
                         </span>
