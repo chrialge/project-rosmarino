@@ -37,6 +37,7 @@ export default {
 
     methods: {
         getToday() {
+            const dayBtn = document.querySelector('.day_txt');
             const monthYearEl = document.querySelector('.month_year');
             const datetxtEl = document.querySelector('.date_txt');
 
@@ -65,8 +66,14 @@ export default {
                     "Dicembre"
                 ]
             }
+            if (dayBtn.textContent == 'Domani') {
+                const obJDate = new Date()
+                this.date = new Date(obJDate.getFullYear(), obJDate.getMonth(), obJDate.getDate() + 1);
+            } else {
+                this.date = new Date();
+            }
 
-            this.date = new Date();
+
             this.dayName = dmObj.days[this.date.getDay() - 1];
             this.month = this.date.getMonth();
             this.day = this.date.getDate();
@@ -140,102 +147,6 @@ export default {
 
                             }
 
-
-                        } else {
-                            if (minutes <= 15) {
-
-                                const dateSet = new Date();
-                                dateSet.setUTCHours(dateSet.getHours(), 15, 0, 0)
-                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
-                                for (let i = 0; i < 10; i++) {
-                                    dateSet.setMilliseconds(900000)
-                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
-
-                                }
-
-                                dateSet.setUTCHours(18, 0, 0, 0)
-                                for (let i = 0; i < 15; i++) {
-
-                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
-                                    dateSet.setMilliseconds(900000)
-
-                                }
-
-
-
-                            } else if (minutes <= 30) {
-
-                                const dateSet = new Date();
-                                dateSet.setUTCHours(dateSet.getHours(), 30, 0, 0)
-                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
-                                for (let i = 0; i < 10; i++) {
-                                    dateSet.setMilliseconds(900000)
-                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
-
-                                }
-
-                                dateSet.setUTCHours(18, 0, 0, 0)
-                                for (let i = 0; i < 15; i++) {
-
-                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
-                                    dateSet.setMilliseconds(900000)
-
-                                }
-
-                            } else if (minutes <= 45) {
-
-                                const dateSet = new Date();
-                                dateSet.setUTCHours(dateSet.getHours(), 45, 0, 0)
-                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
-                                for (let i = 0; i < 10; i++) {
-                                    dateSet.setMilliseconds(900000)
-                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
-
-                                }
-
-                                dateSet.setUTCHours(18, 0, 0, 0)
-                                for (let i = 0; i < 15; i++) {
-
-                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
-                                    dateSet.setMilliseconds(900000)
-
-                                }
-                            } else {
-
-                                const dateSet = new Date();
-                                dateSet.setUTCHours((dateSet.getHours() + 1), 0, 0, 0)
-                                timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes()}</li>`
-                                for (let i = 0; i < 10; i++) {
-                                    dateSet.setMilliseconds(900000)
-                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
-
-                                }
-
-                                dateSet.setUTCHours(18, 0, 0, 0)
-                                for (let i = 0; i < 15; i++) {
-
-                                    timesStart += `<li class="time_circle">${dateSet.getHours()}:${dateSet.getMinutes() == 0 ? '0' + dateSet.getMinutes() : dateSet.getMinutes()}</li>`
-                                    dateSet.setMilliseconds(900000)
-
-                                }
-                            }
-                        }
-
-                    } else {
-
-                        gg.setUTCHours(11, 30, 0, 0)
-                        timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes()}</li>`
-                        for (let i = 0; i < 10; i++) {
-                            gg.setMilliseconds(900000)
-                            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
-
-                        }
-
-                        gg.setUTCHours(18, 0, 0, 0)
-                        for (let i = 0; i < 15; i++) {
-
-                            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
-                            gg.setMilliseconds(900000)
 
                         }
                     }
@@ -518,8 +429,14 @@ export default {
                 }
                 console.log(data);
 
+                const config = {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
+                    "Access-Control-Max-Age": "86400",
+                };
+
                 const url = this.base_api_url + 'api/reservation';
-                axios.post(url, data).then((response) => {
+                axios.post(url, data, config).then((response) => {
                     console.log(response)
 
                     this.loading = false;
@@ -585,6 +502,8 @@ export default {
         // scrita sopra dove ce solo il mese e l'anno
         const monthYearEl = document.querySelector('.month_year');
 
+        const dayBtn = document.querySelector('.day_txt');
+
         // oggetto con i nomi dei mesi e dell'anno
         let dmObj = {
             days: [
@@ -611,12 +530,27 @@ export default {
                 "Dicembre"
             ]
         }
-
         // salvo la data di oggi nell'istanza
         this.date = new Date();
+        if (this.date.getDay() === 1) {
+            // salvo la data di oggi nell'istanza
+            this.date = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate() + 1);
+            dayBtn.textContent = 'Domani'
+
+        } else {
+            this.date = new Date();
+
+        }
+
+
 
         // salvo il nome del giorno
-        this.dayName = dmObj.days[this.date.getDay() - 1];
+        if (this.date.getDay() == 0) {
+            this.dayName = dmObj.days[6];
+        } else {
+            this.dayName = dmObj.days[this.date.getDay() - 1];
+        }
+
 
         // salvo il numero del mese
         this.month = this.date.getMonth();
