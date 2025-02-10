@@ -13,7 +13,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      console.log(to.path)
+
       if (from.path !== "/reservation") {
         to.meta.from = from;
         this.path = from

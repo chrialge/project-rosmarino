@@ -112,6 +112,7 @@ export default {
 
 
 
+
             const timeContainer = document.getElementById('time_list');
 
             if (this.dayName == 'Domenica') {
@@ -119,12 +120,74 @@ export default {
 
                     if (hours >= 15 && minutes >= 0) {
 
+                        if (hours >= 19 && minutes >= 0) {
 
-                        gg.setUTCHours(18, 0, 0, 0)
-                        for (let i = 0; i < 15; i++) {
+                            if (minutes == 0) {
+                                const counter = 15 - (4 * (hours - 19));
 
-                            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
-                            gg.setMilliseconds(900000)
+                                gg.setUTCHours(hours, 0, 0, 0)
+                                for (let i = 0; i < counter; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                            } else if (minutes <= 15) {
+
+                                const counter = 15 - ((4 * (hours - 19)) + 1);
+
+                                gg.setUTCHours(hours, 15, 0, 0)
+                                for (let i = 0; i < counter; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                            } else if (minutes <= 30) {
+
+
+                                const counter = 15 - ((4 * (hours - 19)) + 2);
+
+                                gg.setUTCHours(hours, 30, 0, 0)
+                                for (let i = 0; i < counter; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                            } else if (minutes <= 45) {
+
+
+                                const counter = 15 - ((4 * (hours - 19)) + 3);
+
+                                gg.setUTCHours(hours, 45, 0, 0)
+                                for (let i = 0; i < counter; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                            } else {
+
+                                const counter = 15 - (4 * ((hours + 1) - 19));
+
+                                gg.setUTCHours(hours + 1, 0, 0, 0)
+                                for (let i = 0; i < counter; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                            }
 
                         }
 
@@ -133,7 +196,7 @@ export default {
                         if (hours == 12 && minutes <= 30) {
                             gg.setUTCHours(11, 30, 0, 0)
                             timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes()}</li>`
-                            for (let i = 0; i < 10; i++) {
+                            for (let i = 0; i < 8; i++) {
                                 gg.setMilliseconds(900000)
                                 timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
 
@@ -148,6 +211,110 @@ export default {
                             }
 
 
+                        } else {
+                            if (minutes == 0) {
+                                const counter = (9 - 2) - (4 * (hours - 13));
+
+                                gg.setUTCHours(hours, 0, 0, 0)
+
+                                for (let i = 0; i < counter; i++) {
+                                    gg.setMilliseconds(900000)
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                                }
+
+                                gg.setUTCHours(18, 0, 0, 0)
+                                for (let i = 0; i < 15; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+
+                            } else if (minutes <= 15) {
+
+                                const counter = (9 - 2) - ((4 * (hours - 13)) + 1);
+
+                                gg.setUTCHours(hours, 15, 0, 0)
+
+                                for (let i = 0; i < counter; i++) {
+                                    gg.setMilliseconds(900000)
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                                }
+
+                                gg.setUTCHours(18, 0, 0, 0)
+                                for (let i = 0; i < 15; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+
+
+                            } else if (minutes <= 30) {
+
+
+                                const counter = (9 - 2) - ((4 * (hours - 13)) + 2);
+
+                                gg.setUTCHours(hours, 30, 0, 0)
+
+                                for (let i = 0; i < counter; i++) {
+                                    gg.setMilliseconds(900000)
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                                }
+
+                                gg.setUTCHours(18, 0, 0, 0)
+                                for (let i = 0; i < 15; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+
+                            } else if (minutes <= 45) {
+
+
+                                const counter = (9 - 2) - ((4 * (hours - 13)) + 3);
+
+                                gg.setUTCHours(hours, 30, 0, 0)
+
+                                for (let i = 0; i < counter; i++) {
+                                    gg.setMilliseconds(900000)
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                                }
+
+                                gg.setUTCHours(18, 0, 0, 0)
+                                for (let i = 0; i < 15; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+
+
+                            } else {
+
+                                const counter = (9 - 2) - (4 * ((hours + 1) - 13));
+
+                                gg.setUTCHours(hours + 1, 0, 0, 0)
+
+                                for (let i = 0; i < counter; i++) {
+                                    gg.setMilliseconds(900000)
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                                }
+
+                                gg.setUTCHours(18, 0, 0, 0)
+                                for (let i = 0; i < 15; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+                            }
                         }
                     }
 
@@ -174,19 +341,115 @@ export default {
                 }
             } else {
 
-                gg.setUTCHours(18, 0, 0, 0)
-                for (let i = 0; i < 15; i++) {
+                if (dateNow.getDate() === dateSave.getDate()) {
 
-                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
-                    gg.setMilliseconds(900000)
+                    if (hours >= 19 && minutes >= 0) {
 
+                        if (hours >= 19 && minutes >= 0) {
+
+                            if (minutes == 0) {
+                                const counter = 15 - (4 * (hours - 19));
+
+                                gg.setUTCHours(hours, 0, 0, 0)
+                                for (let i = 0; i < counter; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                            } else if (minutes <= 15) {
+
+                                const counter = 15 - ((4 * (hours - 19)) + 1);
+
+                                gg.setUTCHours(hours, 15, 0, 0)
+                                for (let i = 0; i < counter; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                            } else if (minutes <= 30) {
+
+
+                                const counter = 15 - ((4 * (hours - 19)) + 2);
+
+                                gg.setUTCHours(hours, 30, 0, 0)
+                                for (let i = 0; i < counter; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                            } else if (minutes <= 45) {
+
+
+                                const counter = 15 - ((4 * (hours - 19)) + 3);
+
+                                gg.setUTCHours(hours, 45, 0, 0)
+                                for (let i = 0; i < counter; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+
+                            } else {
+
+                                const counter = 15 - (4 * ((hours + 1) - 19));
+
+                                gg.setUTCHours(hours + 1, 0, 0, 0)
+                                for (let i = 0; i < counter; i++) {
+
+                                    timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                                    gg.setMilliseconds(900000)
+
+                                }
+                                timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                            }
+
+                        }
+
+                    } else {
+
+                        gg.setUTCHours(18, 0, 0, 0)
+                        for (let i = 0; i < 15; i++) {
+
+                            timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                            gg.setMilliseconds(900000)
+
+                        }
+                    }
+
+                    timeContainer.innerHTML = timesStart;
+                } else {
+
+
+                    gg.setUTCHours(18, 0, 0, 0)
+                    for (let i = 0; i < 15; i++) {
+
+                        timesStart += `<li class="time_circle">${gg.getHours()}:${gg.getMinutes() == 0 ? '0' + gg.getMinutes() : gg.getMinutes()}</li>`
+                        gg.setMilliseconds(900000)
+
+                    }
+
+                    timeContainer.innerHTML = timesStart;
                 }
-                timeContainer.innerHTML = timesStart;
             }
 
             const timeCircle = document.querySelectorAll('.time_circle');
             timeCircle.forEach((time) => {
                 time.addEventListener('click', () => {
+
+                    document.getElementById('time_range').style.borderColor = '';
+                    document.getElementById('error_js_time').style.display = 'none';
+
                     if (document.querySelector('.active_time')) {
                         document.querySelector('.active_time').classList.remove('active_time')
 
@@ -597,7 +860,7 @@ export default {
             for (let i = 1; i <= lastDateOfMonth; i++) {
 
                 const dateToday = new Date();
-                console.log(dateToday.getDay())
+
 
                 if (dateToday.getHours() >= 22 && dateToday.getMonth() >= 0 && i == dateToday.getDate()) {
                     days += `<li class="dummy" click="confirmDate()">${i}</li>`;
@@ -744,12 +1007,6 @@ export default {
 
 
 
-
-
-
-
-
-
         const prevBtns = document.querySelectorAll('.btn-previous');
         const nextBtns = document.querySelectorAll('.btn-next');
         const progress = document.getElementById('progress');
@@ -761,32 +1018,57 @@ export default {
 
         nextBtns.forEach((btn) => {
             btn.addEventListener('click', () => {
-                if (formStepsNum == 0) {
-                    if (this.check_name('customer_name', 'error_js_name') && this.check_name('customer_last_name', 'error_js_last_name')) {
+
+                switch (formStepsNum) {
+                    case 0:
+                        if (this.check_name('customer_name', 'error_js_name') && this.check_name('customer_last_name', 'error_js_last_name')) {
+                            formStepsNum++;
+                            this.updateFormStep(formSteps, formStepsNum, false);
+                            this.updateProgressBar(progressSteps, formStepsNum);
+                            break;
+                        } else {
+                            this.check_name('customer_name', 'error_js_name');
+                            this.check_name('customer_last_name', 'error_js_last_name');
+                            break;
+                        }
+                    case 1:
+                        if (this.check_email() && this.check_telephone()) {
+                            formStepsNum++;
+                            this.updateFormStep(formSteps, formStepsNum, false);
+                            this.updateProgressBar(progressSteps, formStepsNum);
+                            break;
+                        } else {
+                            this.check_telephone();
+                            this.check_email()
+                            break;
+                        }
+                    case 2:
                         formStepsNum++;
                         this.updateFormStep(formSteps, formStepsNum, false);
-                        this.updateProgressBar(progressSteps, formStepsNum);
-                    } else {
-                        this.check_name('customer_name', 'error_js_name');
-                        this.check_name('customer_last_name', 'error_js_last_name');
-                    }
 
-                } else if (formStepsNum == 1) {
+                        break;
+                    case 3:
 
-                    if (this.check_email() && this.check_telephone()) {
-                        formStepsNum++;
-                        this.updateFormStep(formSteps, formStepsNum, false);
-                        this.updateProgressBar(progressSteps, formStepsNum);
-                    } else {
-                        this.check_telephone();
-                        this.check_email()
-
-                    }
-
-                } else {
-                    formStepsNum++;
-                    this.updateFormStep(formSteps, formStepsNum, false);
-
+                        if (document.getElementById('time_range').value.length > 0) {
+                            formStepsNum++;
+                            this.updateFormStep(formSteps, formStepsNum, false);
+                            break;
+                        } else {
+                            document.getElementById('time_range').style.borderColor = 'red';
+                            document.getElementById('error_js_time').style.display = 'block';
+                            break;
+                        }
+                    case 4:
+                        if (this.check_person()) {
+                            formStepsNum++;
+                            this.updateFormStep(formSteps, formStepsNum, false);
+                            break;
+                        } else {
+                            this.check_person();
+                            break;
+                        }
+                    default:
+                        break;
                 }
 
 
@@ -1057,7 +1339,7 @@ export default {
                     <label for="time">Orario di prenotazione</label>
                     <input type="time" name="time" id="time_range" v-model="time" disabled>
                     <span id="error_js_time" class="text-danger" style="display: none;">
-                        clicca l'orario che preferisco
+                        clicca l'orario che preferisci
                     </span>
                 </div>
 
