@@ -18,7 +18,7 @@ export default {
     data() {
         return {
             time: '',
-            base_api_url: 'https://backrosmarino.org/',
+            base_api_url: 'http://127.0.0.1:8000/',
             customer_name: '',
             customer_last_name: '',
             customer_email: '',
