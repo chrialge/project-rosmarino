@@ -1,10 +1,6 @@
 <script>
-import { Value } from 'sass';
-import { ref } from 'vue';
-
-import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { getMonth, getYear, getDate, lastDayOfMonth, getTime } from 'date-fns';
+import { getMonth, getYear, getDate} from 'date-fns';
 import axios from 'axios';
 
 
@@ -18,7 +14,7 @@ export default {
     data() {
         return {
             time: '',
-            base_api_url: 'http://127.0.0.1:8000/',
+            base_api_url: 'https://backrosmarino.org/',
             customer_name: '',
             customer_last_name: '',
             customer_email: '',
